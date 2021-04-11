@@ -20,11 +20,11 @@ public class DrawMaze {
 
         int posX = tile.getX() + 1;
         if(posX > 0){
-            posX = posX *20;
+            posX = posX * maze.getSize();
         }
         int posY = tile.getY()+1;
         if(posY >0){
-            posY = posY*20;
+            posY = posY* maze.getSize();
         }
 
         if (tile.isEnd()){
@@ -48,17 +48,17 @@ public class DrawMaze {
 
     public void drawRightWall(Graphics g,int  posX, int posY){
 
-        g.drawLine(posX+20,posY,posX+20,posY+20);
+        g.drawLine(posX+ maze.getSize(),posY,posX+ maze.getSize(),posY+ maze.getSize());
     }
 
     public void drawTopWall(Graphics g,int posX, int posY){
-        g.drawLine(posX,posY,posX+20,posY);
+        g.drawLine(posX,posY,posX+ maze.getSize(),posY);
     }
     public void drawBottomWall(Graphics g, int posX, int posY){
-        g.drawLine(posX,posY+20,posX+20,posY+20);
+        g.drawLine(posX,posY+ maze.getSize(),posX+ maze.getSize(),posY+ maze.getSize());
 
     }
     public void drawLeftWall(Graphics g, int posX, int posY){
-        g.drawLine(posX,posY,posX,posY+20);
+        g.drawLine(posX,posY,posX,posY+ maze.getSize());
     }
 }

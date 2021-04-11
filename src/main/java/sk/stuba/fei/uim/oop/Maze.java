@@ -7,16 +7,26 @@ public class Maze {
     private ArrayList<ArrayList<Tile>> grid;
     private int rows;
     private int cols;
+    private int size;
 
     public Maze(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
+        this.size = 20;
         grid = new ArrayList<>();
         makeGrid();
         GenerateMaze gr = new GenerateMaze(this);
 
 
 
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public void drawMaze(Graphics g){

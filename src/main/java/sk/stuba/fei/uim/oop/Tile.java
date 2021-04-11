@@ -11,6 +11,7 @@ public class Tile {
     private boolean leftWall;
     private boolean bottomWall;
     private boolean isEnd;
+    private int size;
 
 
     public Tile(int x, int y) {
@@ -22,6 +23,7 @@ public class Tile {
         leftWall = true;
         bottomWall = true;
         isEnd = false;
+        size = 20;
     }
 
     public boolean isEnd() {
