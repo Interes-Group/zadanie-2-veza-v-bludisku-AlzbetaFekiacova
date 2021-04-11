@@ -20,6 +20,8 @@ public class DrawMaze {
 
 
     public void drawTile(Tile tile, Graphics g){
+
+
         int posX = tile.getX() + 1;
         if(posX > 0){
             posX = posX *20;
@@ -28,6 +30,12 @@ public class DrawMaze {
         if(posY >0){
             posY = posY*20;
         }
+        /*
+        if (tile.isVisited()){
+            g.setColor(Color.red);
+            g.fillRect(posX, posY, 5, 5);
+        }*/
+        g.setColor(Color.black);
         if(tile.isBottomWall()){
             drawBottomWall(g, posX, posY);
         }
@@ -43,22 +51,18 @@ public class DrawMaze {
     }
 
     public void drawRightWall(Graphics g,int  posX, int posY){
-        g.setColor(Color.BLACK);
 
         g.drawLine(posX+20,posY,posX+20,posY+20);
     }
 
     public void drawTopWall(Graphics g,int posX, int posY){
-        g.setColor(Color.BLACK);
         g.drawLine(posX,posY,posX+20,posY);
     }
     public void drawBottomWall(Graphics g, int posX, int posY){
-        g.setColor(Color.BLACK);
         g.drawLine(posX,posY+20,posX+20,posY+20);
 
     }
     public void drawLeftWall(Graphics g, int posX, int posY){
-        g.setColor(Color.BLACK);
         g.drawLine(posX,posY,posX,posY+20);
     }
 }

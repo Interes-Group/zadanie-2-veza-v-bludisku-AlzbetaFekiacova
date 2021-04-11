@@ -13,6 +13,9 @@ public class Maze {
         this.cols = cols;
         grid = new ArrayList<>();
         makeGrid();
+        GenerateMaze gr = new GenerateMaze(this);
+
+
 
     }
 

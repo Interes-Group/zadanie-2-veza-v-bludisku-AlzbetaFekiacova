@@ -1,5 +1,7 @@
 package sk.stuba.fei.uim.oop;
 
+import java.util.ArrayList;
+
 public class Tile {
     private int x;
     private int y;
@@ -8,6 +10,7 @@ public class Tile {
     private boolean rightWall;
     private boolean leftWall;
     private boolean bottomWall;
+
 
     public Tile(int x, int y) {
         this.x = x;
@@ -18,50 +21,83 @@ public class Tile {
         leftWall = true;
         bottomWall = true;
     }
-/*
-    public void drawTile(Graphics g){
-        int posX = x-1;
-        if(posX > 0){
-            posX = posX *20;
-        }
-        int posY = y-1;
-        if(posY >0){
-            posY = posY*20;
-        }
-        if(bottomWall){
-            drawBottomWall(g, posX, posY);
-        }
-        if(topWall){
-            drawTopWall(g, posX, posY);
-        }
-        if(leftWall){
-            drawLeftWall(g, posX, posY);
-        }
-        if(rightWall){
-            drawRightWall(g, posX, posY);
-        }
+
+    public void breakTopWall() {
+        this.topWall = false;
     }
 
-    public void drawRightWall(Graphics g,int  posX, int posY){
-        g.setColor(Color.BLACK);
-
-        g.drawLine(posX,posY+20,posX+20,posY+20);
-    }
-
-    public void drawTopWall(Graphics g,int posX, int posY){
-        g.setColor(Color.BLACK);
-        g.drawLine(posX,posY,posX,posY+20);
-    }
-    public void drawBottomWall(Graphics g, int posX, int posY){
-        g.setColor(Color.BLACK);
-        g.drawLine(x=posX+20,posX,posX+20,posY+20);
+    public void breakRightWall() {
+        this.rightWall = false;
 
     }
-    public void drawLeftWall(Graphics g, int posX, int posY){
-        g.setColor(Color.BLACK);
-        g.drawLine(posX,posY,posX+20,posY);
+
+    public void breakLeftWall() {
+        this.leftWall = false;
     }
-*/
+
+    public void breakBottomWall() {
+        this.bottomWall = false;
+    }
+
+    private boolean isValidXRight(Maze maze) {
+        return (x + 1) < maze.getCols();
+    }
+
+    private boolean isValidXLeft(Maze maze) {
+        return x - 1 >= 0;
+    }
+
+    private boolean isValidYTop(Maze maze) {
+        return (y - 1) >= 0;
+    }
+
+    private boolean isValidYBottom(Maze maze) {
+        return (y + 1) < maze.getCols();
+    }
+
+
+    public ArrayList<Tile> checkNeighbours(Maze maze) {
+        ArrayList<Tile> neighbours = new ArrayList<>();
+        Tile right = null;
+        Tile left = null;
+        Tile bottom = null;
+        Tile top = null;
+        if (isValidXRight(maze)) {
+            right = maze.getGrid().get(x + 1).get(y);
+        }
+        if (isValidXLeft(maze)) {
+            left = maze.getGrid().get(x - 1).get(y);
+        }
+        if (isValidYTop(maze)) {
+            top = maze.getGrid().get(x).get(y - 1);
+        }
+        if (isValidYBottom(maze)) {
+            bottom = maze.getGrid().get(x).get(y + 1);
+        }
+        if (top != null) {
+            if (!top.isVisited()) {
+                neighbours.add(top);
+            }
+        }
+        if (right != null) {
+            if (!right.isVisited()) {
+                neighbours.add(right);
+            }
+        }
+        if (bottom != null) {
+            if (!bottom.isVisited()) {
+                neighbours.add(bottom);
+            }
+        }
+        if (left != null) {
+            if (!left.isVisited()) {
+                neighbours.add(left);
+            }
+        }
+        return neighbours;
+    }
+
+
     public int getX() {
         return x;
     }
