@@ -7,7 +7,7 @@ public class MyWindow {
     private int sizeX = 300;
     private int sizeY = 300;
 
-    public MyWindow(Maze maze) {
+    public MyWindow(Maze maze, Player player) {
         JFrame window = new JFrame();
         window.setSize(sizeX, sizeY);
         window.setVisible(true);
@@ -15,7 +15,7 @@ public class MyWindow {
 
         window.setLayout(new BorderLayout());
 
-        window.add(new MyCanvas(maze));
+        window.add(new MyCanvas(maze,player));
 
     }
 

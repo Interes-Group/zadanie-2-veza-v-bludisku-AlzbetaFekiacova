@@ -49,8 +49,7 @@ public class GenerateMaze {
         this.maze = maze;
         current = maze.getGrid().get(0).get(0);
         stack.push(current);
-        //int visited = 1;
-        //int total = maze.getCols() * maze.getRows();
+
         while (!stack.empty()) {
             Tile next = stack.pop();
             if(!next.isVisited()){
@@ -65,55 +64,15 @@ public class GenerateMaze {
                 randomlyAddNodesToStack(neighs);
             }
             current = next;
-
-
-
-            /*
-            ArrayList<Tile> neighs = current.checkNeighbours(maze);
-            if (neighs.size() > 0) {
-                Tile next = addRandomNeigh(neighs);
-                isBottomNeigh(current, next);
-                isLeftNeigh(current, next);
-                isRightNeigh(current, next);
-                isTopNeigh(current, next);
-                stack.push(current);
-                current = next;
-
-            }
         }
-*/}
+        setEndTile();
 
-        /*
-        int visited = 0;
-        this.maze = maze;
-        rand = new Random();
-        stack = new Stack<>();
-        current = maze.getGrid().get(0).get(0);
-        stack.push(current);
-        Tile next = null;
-        while (!stack.empty()) {
-
-            next = stack.pop();
-            isBottomNeigh(current, next);
-            isLeftNeigh(current, next);
-            isRightNeigh(current, next);
-            isTopNeigh(current, next);
-            ArrayList<Tile> neighs = next.checkNeighbours(maze);
-            if (neighs.size() > 0) {
-                next.setVisited(true);
-                randomlyAddNodesToStack(neighs);
-            }
-            current = next;
-        }
-
-
-/*
-*/
     }
 
-    private Tile addRandomNeigh(ArrayList<Tile> tiles){
-        int target = rand.nextInt(tiles.size());
-        return tiles.get(target);
+
+    private void setEndTile(){
+        maze.getGrid().get(maze.getRows() - 1).get(maze.getCols()-1).setEnd(true);
+
     }
 
     private void randomlyAddNodesToStack(ArrayList<Tile> tiles) {

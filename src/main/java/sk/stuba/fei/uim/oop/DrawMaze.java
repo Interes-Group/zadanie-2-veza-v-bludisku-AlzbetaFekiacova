@@ -6,11 +6,7 @@ public class DrawMaze {
     private Maze maze;
     public DrawMaze(Maze maze, Graphics g){
         this.maze = maze;
-
-        //g.setColor(Color.BLACK);
-        //g.fillRect(0,0,(rows-1)*20, (cols-1)*20);
-
-        for (int i = 0; i< maze.getRows(); i++){
+                for (int i = 0; i< maze.getRows(); i++){
             for (int j = 0; j <maze.getCols(); j++){
                 Tile t = maze.getGrid().get(i).get(j);
                 drawTile(t, g);
@@ -30,11 +26,11 @@ public class DrawMaze {
         if(posY >0){
             posY = posY*20;
         }
-        /*
-        if (tile.isVisited()){
-            g.setColor(Color.red);
-            g.fillRect(posX, posY, 5, 5);
-        }*/
+
+        if (tile.isEnd()){
+            g.setColor(Color.BLUE);
+            g.fillRect(posX+5, posY+5, 5, 5);
+        }
         g.setColor(Color.black);
         if(tile.isBottomWall()){
             drawBottomWall(g, posX, posY);

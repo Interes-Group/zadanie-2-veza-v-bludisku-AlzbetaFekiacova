@@ -10,6 +10,7 @@ public class Tile {
     private boolean rightWall;
     private boolean leftWall;
     private boolean bottomWall;
+    private boolean isEnd;
 
 
     public Tile(int x, int y) {
@@ -20,6 +21,15 @@ public class Tile {
         rightWall = true;
         leftWall = true;
         bottomWall = true;
+        isEnd = false;
+    }
+
+    public boolean isEnd() {
+        return isEnd;
+    }
+
+    public void setEnd(boolean end) {
+        isEnd = end;
     }
 
     public void breakTopWall() {
