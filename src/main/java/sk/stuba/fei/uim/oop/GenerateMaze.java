@@ -47,6 +47,7 @@ public class GenerateMaze {
         stack = new Stack<>();
         rand = new Random();
         this.maze = maze;
+        maze.makeGrid();
         current = maze.getGrid().get(0).get(0);
         stack.push(current);
 

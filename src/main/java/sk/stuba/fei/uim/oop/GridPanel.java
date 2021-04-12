@@ -1,5 +1,7 @@
 package sk.stuba.fei.uim.oop;
 
+import lombok.SneakyThrows;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -11,8 +13,12 @@ public class GridPanel extends JPanel implements KeyListener {
     private Player player;
     private Maze maze;
     private MyCanvas canvas;
+    Game game;
 
-    public GridPanel(Player player, Maze maze){
+    public GridPanel(Game game){
+        this.game = game;
+        this.player=game.getPlayer();
+        this.maze=game.getMaze();
         sizeX = 300;
         sizeY = 300;
         this.setBackground(Color.white);
@@ -21,7 +27,7 @@ public class GridPanel extends JPanel implements KeyListener {
 
         this.player = player;
         this.maze = maze;
-        this.canvas = new MyCanvas(maze, player);
+        this.canvas = new MyCanvas(game);
         canvas.setBounds(0,10,300,300);
         this.add(canvas);
 
@@ -36,10 +42,17 @@ public class GridPanel extends JPanel implements KeyListener {
 
     }
 
+
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        try {
+            game.playerMove(code);
 
+        } catch (GameEnded gameEnded) {
+
+        }
+/*
         if(code == KeyEvent.VK_UP){
             player.isValidMoveUP(maze);
             System.out.println("Stlacene hore");
@@ -63,7 +76,7 @@ public class GridPanel extends JPanel implements KeyListener {
             System.out.println("Stlacene dolava");
             System.out.println("pozicia je x : " + player.getPosX() + " pozicia y je : " + player.getPosY());
             //canvas.repaint();
-        }
+        }*/
         canvas.repaint();
         //this.repaint();
         System.out.println("repainted");

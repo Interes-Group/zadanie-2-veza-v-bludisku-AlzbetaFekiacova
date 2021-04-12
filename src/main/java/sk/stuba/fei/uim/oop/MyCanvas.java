@@ -3,16 +3,14 @@ package sk.stuba.fei.uim.oop;
 import java.awt.*;
 
 public class MyCanvas extends Canvas {
-    private Maze maze;
-    private Player player;
-    public MyCanvas (Maze maze, Player player){
+    private Game game;
+    public MyCanvas (Game game){
 
-        this.maze = maze;
-        this.player = player;
+        this.game = game;
     }
     public void paint(Graphics g){
-        maze.drawMaze(g);
-        player.drawPlayer(g);
+        game.getMaze().drawMaze(g);
+        game.getPlayer().drawPlayer(g);
 
     }
 

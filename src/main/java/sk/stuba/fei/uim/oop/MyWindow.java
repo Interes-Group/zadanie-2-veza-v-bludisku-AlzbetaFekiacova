@@ -7,7 +7,7 @@ public class MyWindow {
     private int sizeX = 600;
     private int sizeY = 300;
 
-    public MyWindow(Maze maze, Player player) {
+    public MyWindow(Game game) {
         JFrame window = new JFrame();
         window.setSize(sizeX, sizeY);
         window.setVisible(true);
@@ -21,7 +21,7 @@ public class MyWindow {
         //window.requestFocusInWindow();
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
-        GridPanel gridPanel = new GridPanel(player, maze);
+        GridPanel gridPanel = new GridPanel(game);
         window.add(gridPanel);
 
         window.addKeyListener(gridPanel);

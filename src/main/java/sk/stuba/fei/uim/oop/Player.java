@@ -1,6 +1,7 @@
 package sk.stuba.fei.uim.oop;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Player {
     private int posX;
@@ -95,21 +96,7 @@ public class Player {
         }
 
     }
-    public void isValidMoveLeft(Maze maze){
-        if((posX - 1) >= 0){
-            Tile t = maze.getGrid().get(posX).get(posY);
-            System.out.println("Stena hore: " + t.isTopWall());
-            System.out.println("Stena vpravo: " + t.isRightWall());
-            System.out.println("Stena dole: " + t.isBottomWall());
-            System.out.println("Stena vlavo: " + t.isLeftWall());
-            if(!maze.getGrid().get(posX).get(posY).isLeftWall()){
-                moveLeft();
 
-            }
-
-        }
-
-    }
 
 }
 

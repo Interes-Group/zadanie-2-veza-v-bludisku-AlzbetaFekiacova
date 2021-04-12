@@ -14,7 +14,7 @@ public class Maze {
         this.cols = cols;
         this.size = 20;
         grid = new ArrayList<>();
-        makeGrid();
+        //makeGrid();
         GenerateMaze gr = new GenerateMaze(this);
 
     }
@@ -32,7 +32,7 @@ public class Maze {
 
     }
 
-    private void makeGrid(){
+    public void makeGrid(){
         for (int i = 0; i < rows; i++){
             ArrayList<Tile> row = new ArrayList<>();
             for(int j = 0; j < cols; j++){
