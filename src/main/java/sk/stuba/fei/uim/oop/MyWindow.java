@@ -15,11 +15,16 @@ public class MyWindow {
         window.setResizable(false); // prevent from being resized
         window.setLayout(new BorderLayout());
         window.setTitle("Maze Game");
+        window.setLayout(null);
 
-        GamePanel gp = new GamePanel();
-        window.add(gp);
+        window.setFocusable(true);
+        //window.requestFocusInWindow();
+        GamePanel gamePanel = new GamePanel();
+        window.add(gamePanel);
+        GridPanel gridPanel = new GridPanel(player, maze);
+        window.add(gridPanel);
 
-        window.add(new MyCanvas(maze,player));
+        window.addKeyListener(gridPanel);
 
     }
 

@@ -17,8 +17,6 @@ public class Maze {
         makeGrid();
         GenerateMaze gr = new GenerateMaze(this);
 
-
-
     }
 
     public int getSize() {
@@ -31,15 +29,6 @@ public class Maze {
 
     public void drawMaze(Graphics g){
         DrawMaze dr = new DrawMaze(this, g);
-        //g.setColor(Color.BLACK);
-        //g.fillRect(0,0,(rows-1)*20, (cols-1)*20);
-/*
-        for (int i = 0; i< rows; i++){
-            for (int j = 0; j < cols; j++){
-                Tile t = grid.get(i).get(j);
-                t.drawTile(g);
-            }
-        }*/
 
     }
 
