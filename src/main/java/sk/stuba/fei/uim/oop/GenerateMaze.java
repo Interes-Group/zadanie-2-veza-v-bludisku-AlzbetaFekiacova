@@ -41,8 +41,6 @@ public class GenerateMaze {
     }
 
 
-
-
     public GenerateMaze(Maze maze) {
         stack = new Stack<>();
         rand = new Random();
@@ -53,7 +51,7 @@ public class GenerateMaze {
 
         while (!stack.empty()) {
             Tile next = stack.pop();
-            if(!next.isVisited()){
+            if (!next.isVisited()) {
                 isBottomNeigh(current, next);
                 isLeftNeigh(current, next);
                 isRightNeigh(current, next);
@@ -71,8 +69,8 @@ public class GenerateMaze {
     }
 
 
-    private void setEndTile(){
-        maze.getGrid().get(maze.getRows() - 1).get(maze.getCols()-1).setEnd(true);
+    private void setEndTile() {
+        maze.getGrid().get(maze.getRows() - 1).get(maze.getCols() - 1).setEnd(true);
 
     }
 
@@ -83,7 +81,6 @@ public class GenerateMaze {
             stack.push(tiles.remove(targetIndex));
         }
     }
-
 
 
 }

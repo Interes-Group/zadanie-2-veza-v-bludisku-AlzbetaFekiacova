@@ -1,15 +1,19 @@
 package sk.stuba.fei.uim.oop;
 
-public class GameEnded extends Exception{
+import javax.swing.*;
 
-    public GameEnded(Game game){
+public class GameEnded extends Exception {
+
+    public GameEnded(Game game, Boolean reset, JLabel games) {
         game.getPlayer().setPosX(0);
         game.getPlayer().setPosY(0);
         int rows = game.getMaze().getRows();
         int cols = game.getMaze().getCols();
-        game.setMaze( new Maze(rows, cols));
+        game.setMaze(new Maze(rows, cols));
+        if (!reset) {
+            game.incrementSuccessfulGames();
+            games.setText("Number of successful games played: " + game.getSuccessfulGames());
+        }
 
-        //GenerateMaze generateMaze = new GenerateMaze(maze);
-        //maze.setGrid(generateMaze.generate(maze));
     }
 }

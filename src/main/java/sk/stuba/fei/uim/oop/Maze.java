@@ -14,7 +14,6 @@ public class Maze {
         this.cols = cols;
         this.size = 20;
         grid = new ArrayList<>();
-        //makeGrid();
         GenerateMaze gr = new GenerateMaze(this);
 
     }
@@ -27,15 +26,15 @@ public class Maze {
         this.size = size;
     }
 
-    public void drawMaze(Graphics g){
+    public void drawMaze(Graphics g) {
         DrawMaze dr = new DrawMaze(this, g);
 
     }
 
-    public void makeGrid(){
-        for (int i = 0; i < rows; i++){
+    public void makeGrid() {
+        for (int i = 0; i < rows; i++) {
             ArrayList<Tile> row = new ArrayList<>();
-            for(int j = 0; j < cols; j++){
+            for (int j = 0; j < cols; j++) {
                 row.add(new Tile(i, j));
             }
             grid.add(row);

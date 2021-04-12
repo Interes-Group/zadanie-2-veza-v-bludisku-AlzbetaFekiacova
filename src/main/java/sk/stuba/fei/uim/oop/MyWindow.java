@@ -7,7 +7,9 @@ public class MyWindow {
     private int sizeX = 600;
     private int sizeY = 300;
 
-    public MyWindow(Game game) {
+    public MyWindow(Game game, JLabel numberOfGames) {
+
+        MyCanvas myCanvas = new MyCanvas(game);
         JFrame window = new JFrame();
         window.setSize(sizeX, sizeY);
         window.setVisible(true);
@@ -18,13 +20,15 @@ public class MyWindow {
         window.setLayout(null);
 
         window.setFocusable(true);
-        //window.requestFocusInWindow();
-        GamePanel gamePanel = new GamePanel();
+
+        GridPanel gridPanel = new GridPanel(game, myCanvas);
+        GamePanel gamePanel = new GamePanel(game, myCanvas, numberOfGames, gridPanel);
         window.add(gamePanel);
-        GridPanel gridPanel = new GridPanel(game);
         window.add(gridPanel);
 
+
         window.addKeyListener(gridPanel);
+
 
     }
 

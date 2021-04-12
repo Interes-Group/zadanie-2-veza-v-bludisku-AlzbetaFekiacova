@@ -35,19 +35,19 @@ public class Player {
     }
 
     public void moveUp() {
-        posY -=1;
+        posY -= 1;
     }
 
     public void moveDown() {
-        posY +=1;
+        posY += 1;
     }
 
     public void moveRight() {
-        posX +=1;
+        posX += 1;
     }
 
     public void moveLeft() {
-        posX -=1;
+        posX -= 1;
     }
 
     public void isValidMoveUP(Maze maze) {
@@ -66,14 +66,14 @@ public class Player {
 
     }
 
-    public void isValidMoveRight(Maze maze){
-        if((posX + 1) < maze.getCols()){
+    public void isValidMoveRight(Maze maze) {
+        if ((posX + 1) < maze.getCols()) {
             Tile t = maze.getGrid().get(posX).get(posY);
             System.out.println("Stena hore: " + t.isTopWall());
             System.out.println("Stena vpravo: " + t.isRightWall());
             System.out.println("Stena dole: " + t.isBottomWall());
             System.out.println("Stena vlavo: " + t.isLeftWall());
-            if(!maze.getGrid().get(posX).get(posY).isRightWall()){
+            if (!maze.getGrid().get(posX).get(posY).isRightWall()) {
                 moveRight();
 
             }
@@ -81,14 +81,15 @@ public class Player {
         }
 
     }
-    public void isValidMoveDown(Maze maze){
-        if((posY + 1) < maze.getRows()){
+
+    public void isValidMoveDown(Maze maze) {
+        if ((posY + 1) < maze.getRows()) {
             Tile t = maze.getGrid().get(posX).get(posY);
             System.out.println("Stena hore: " + t.isTopWall());
             System.out.println("Stena vpravo: " + t.isRightWall());
             System.out.println("Stena dole: " + t.isBottomWall());
             System.out.println("Stena vlavo: " + t.isLeftWall());
-            if(!maze.getGrid().get(posX).get(posY).isBottomWall()){
+            if (!maze.getGrid().get(posX).get(posY).isBottomWall()) {
                 moveDown();
 
             }
