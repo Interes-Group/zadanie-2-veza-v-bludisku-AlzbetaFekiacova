@@ -1,13 +1,17 @@
 package sk.stuba.fei.uim.oop;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 
-public class MyCanvas extends Canvas {
+public class MyCanvas extends Canvas  {
     private Game game;
+
 
     public MyCanvas(Game game) {
 
         this.game = game;
+        this.setFocusable(false);
+        this.addMouseListener(new MouseClik(game));
     }
 
     public void paint(Graphics g) {

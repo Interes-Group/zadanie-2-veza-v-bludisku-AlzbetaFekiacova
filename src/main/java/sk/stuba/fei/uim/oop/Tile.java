@@ -12,6 +12,7 @@ public class Tile {
     private boolean bottomWall;
     private boolean isEnd;
     private int size;
+    private boolean isAvailable;
 
 
     public Tile(int x, int y) {
@@ -24,6 +25,15 @@ public class Tile {
         bottomWall = true;
         isEnd = false;
         size = 20;
+        isAvailable = false;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public boolean isEnd() {

@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class GridPanel extends JPanel implements KeyListener {
+public class GridPanel extends JPanel {
     private int sizeX;
     private int sizeY;
     private Player player;
@@ -17,6 +19,7 @@ public class GridPanel extends JPanel implements KeyListener {
 
 
     public GridPanel(Game game, MyCanvas myCanvas) {
+
         this.game = game;
         this.player = game.getPlayer();
         this.maze = game.getMaze();
@@ -27,8 +30,9 @@ public class GridPanel extends JPanel implements KeyListener {
         this.setLayout(null);
 
         this.canvas = myCanvas;
-        canvas.setBounds(0, 10, 300, 300);
+        canvas.setBounds(0, 0, 300, 300);
         this.add(canvas);
+
 
     }
 
@@ -36,29 +40,4 @@ public class GridPanel extends JPanel implements KeyListener {
         return canvas;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
-        try {
-            game.playerMove(code);
-
-        } catch (GameEnded gameEnded) {
-
-        }
-        canvas.repaint();
-        System.out.println("repainted");
-
-    }
-
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }

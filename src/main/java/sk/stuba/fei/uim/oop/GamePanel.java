@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBackground(Color.cyan);
         this.setBounds(300, 0, sizeX, sizeY);
         this.setLayout(null);
-
+        this.setFocusable(false);
 
         reset = new JButton("RESET");
         reset.setBounds(100, 10, 100, 25);

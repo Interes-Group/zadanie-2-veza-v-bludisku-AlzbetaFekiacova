@@ -12,7 +12,7 @@ public class Game {
     public Game() {
 
         player = new Player();
-        maze = new Maze(5, 5);
+        maze = new Maze(11, 11);
         successfulGames = 0;
 
         numberOfGames = new JLabel("Number of successful games played: " + getSuccessfulGames());

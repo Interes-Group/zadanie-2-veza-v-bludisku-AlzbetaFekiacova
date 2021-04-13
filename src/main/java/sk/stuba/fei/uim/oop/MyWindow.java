@@ -25,9 +25,11 @@ public class MyWindow {
         GamePanel gamePanel = new GamePanel(game, myCanvas, numberOfGames, gridPanel);
         window.add(gamePanel);
         window.add(gridPanel);
+        ArrowKeys arrowKeys = new ArrowKeys(game,myCanvas);
+        window.addKeyListener(arrowKeys);
 
 
-        window.addKeyListener(gridPanel);
+        //window.addKeyListener(gridPanel);
 
 
     }
