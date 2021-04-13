@@ -28,6 +28,11 @@ public class DrawMaze {
             posY = posY * maze.getSize();
         }
 
+        if (tile.isAvailable()){
+            g.setColor(Color.YELLOW);
+            g.fillRect(posX + 5, posY + 5, 5, 5);
+        }
+
         if (tile.isEnd()) {
             g.setColor(Color.BLUE);
             g.fillRect(posX + 5, posY + 5, 5, 5);

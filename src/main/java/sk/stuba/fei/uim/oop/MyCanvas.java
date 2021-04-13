@@ -11,7 +11,7 @@ public class MyCanvas extends Canvas  {
 
         this.game = game;
         this.setFocusable(false);
-        this.addMouseListener(new MouseClik(game));
+        this.addMouseListener(new MouseClik(game, this));
     }
 
     public void paint(Graphics g) {
