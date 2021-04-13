@@ -23,7 +23,6 @@ public class GamePanel extends JPanel implements ActionListener {
     private GridPanel gridPanel;
     public GamePanel(Game game, MyCanvas canvas, JLabel numberOfGames, GridPanel grid) {
 
-
         this.canvas = canvas;
         this.game = game;
         this.sizeX = 300;
@@ -31,22 +30,29 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBackground(Color.cyan);
         this.setBounds(300, 0, sizeX, sizeY);
         this.setLayout(null);
+
+
         reset = new JButton("RESET");
         reset.setBounds(100, 10, 100, 25);
         reset.addActionListener(this);
+        reset.setFocusable(false);
         up = new JButton("UP");
         up.addActionListener(this);
+        up.setFocusable(false);
         up.setBounds(100, 60, 100, 25);
         right = new JButton("RIGHT");
         right.addActionListener(this);
         right.setBounds(200, 90, 100, 25);
-
+        right.setFocusable(false);
         down = new JButton("DOWN");
         down.addActionListener(this);
         down.setBounds(100, 130, 100, 25);
+        down.setFocusable(false);
+
         left = new JButton("LEFT");
         left.setBounds(0, 90, 100, 25);
         left.addActionListener(this);
+        left.setFocusable(false);
         games = numberOfGames;
         games.setBounds(20, 170, 2000, 25);
 
@@ -58,11 +64,9 @@ public class GamePanel extends JPanel implements ActionListener {
         this.add(left);
         this.add(games);
         gridPanel = grid;
-        this.addKeyListener(gridPanel);
+
     }
 
-
-    @SneakyThrows
 
     public void actionPerformed(ActionEvent e) {
         try {

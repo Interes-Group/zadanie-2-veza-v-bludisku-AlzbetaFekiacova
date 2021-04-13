@@ -68,7 +68,6 @@ public class Game {
             isValidMoveLeft(maze);
             System.out.println("Stlacene dolava");
             System.out.println("pozicia je x : " + player.getPosX() + " pozicia y je : " + player.getPosY());
-            //canvas.repaint();
         }
 
         if (maze.getGrid().get(player.getPosX()).get(player.getPosY()).isEnd()) {
@@ -81,9 +80,6 @@ public class Game {
         return player;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     public Maze getMaze() {
         return maze;
