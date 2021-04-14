@@ -1,7 +1,6 @@
 package sk.stuba.fei.uim.oop;
 
 import java.awt.*;
-import java.awt.event.MouseListener;
 
 public class MyCanvas extends Canvas  {
     private Game game;
@@ -11,7 +10,9 @@ public class MyCanvas extends Canvas  {
 
         this.game = game;
         this.setFocusable(false);
-        this.addMouseListener(new MouseClik(game, this));
+        Mouse mouse = new Mouse(game, this);
+        this.addMouseListener(mouse);
+        this.addMouseMotionListener(mouse);
     }
 
     public void paint(Graphics g) {

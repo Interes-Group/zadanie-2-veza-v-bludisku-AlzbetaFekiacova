@@ -16,15 +16,15 @@ public class Player {
     public Player() {
         posX = 0;
         posY = 0;
-        posXonCanvas = 27;
-        posYonCanvas = 27;
+        posXonCanvas = 28;
+        posYonCanvas = 28;
     }
 
 
     public boolean isPositionInRadius(int x, int y) {
         int a = abs(posXonCanvas - x);
         int b = abs(posYonCanvas - y);
-        return a <= 8 && b <= 8;
+        return a <= 5 && b <= 5;
     }
 
     public int getPosXonCanvas() {
@@ -37,7 +37,7 @@ public class Player {
 
     public void drawPlayer(Graphics g) {
         g.setColor(Color.GREEN);
-        g.fillRect((posX + 1) * 20 + 5, (posY + 1) * 20 + 5, 5, 5);
+        g.fillRect((posX + 1) * 20 + 5, (posY + 1) * 20 + 5, 10, 10);
 
     }
 
@@ -87,10 +87,7 @@ public class Player {
 
     public boolean isValidMoveUP(int y, Maze maze) {
         if ((y - 1) >= 0) {
-            if (!maze.getGrid().get(posX).get(y).isTopWall()) {
-                return true;
-
-            }
+            return !maze.getGrid().get(posX).get(y).isTopWall();
         }
         return false;
 
@@ -98,10 +95,7 @@ public class Player {
 
     public boolean isValidMoveRight(int x, Maze maze) {
         if ((x + 1) < maze.getCols()) {
-            if (!maze.getGrid().get(x).get(posY).isRightWall()) {
-                return true;
-
-            }
+            return !maze.getGrid().get(x).get(posY).isRightWall();
 
         }
         return false;
@@ -110,10 +104,7 @@ public class Player {
 
     public boolean isValidMoveDown(int y, Maze maze) {
         if ((y + 1) < maze.getRows()) {
-            if (!maze.getGrid().get(posX).get(y).isBottomWall()) {
-                return true;
-
-            }
+            return !maze.getGrid().get(posX).get(y).isBottomWall();
 
         }
         return false;
@@ -121,10 +112,7 @@ public class Player {
 
     public boolean isValidMoveLeft(int x, Maze maze) {
         if ((x - 1) >= 0) {
-            if (!maze.getGrid().get(x).get(posY).isLeftWall()) {
-                return true;
-
-            }
+            return !maze.getGrid().get(x).get(posY).isLeftWall();
 
         }
         return false;
@@ -172,43 +160,25 @@ public class Player {
         ArrayList<Tile> availableTiles = new ArrayList<>();
         Tile t = getAvailableUp(maze);
         if (t != null) {
-            t.setAvailable(true);
+            //t.setAvailable(true);
             availableTiles.add(t);
         }
         t = getAvailableRight(maze);
         if (t != null) {
-            t.setAvailable(true);
+            //t.setAvailable(true);
             availableTiles.add(t);
         }
         t = getAvailableDown(maze);
         if (t != null) {
-            t.setAvailable(true);
+            //t.setAvailable(true);
             availableTiles.add(t);
         }
         t = getAvailableLeft(maze);
         if (t != null) {
-            t.setAvailable(true);
+            //t.setAvailable(true);
             availableTiles.add(t);
         }
 
-
-        /*
-        if (maze.getGrid().get(posX).get(availableGoUp(maze)) != maze.getGrid().get(posX).get(posY)){
-            availableTiles.add(maze.getGrid().get(getPosX()).get(availableGoUp(maze)));
-            maze.getGrid().get(posX).get(availableGoUp(maze)).setAvailable(true);
-        }
-        if( maze.getGrid().get(availableGoRight(maze)).get(posY) != maze.getGrid().get(posX).get(posY)){
-            availableTiles.add(maze.getGrid().get(availableGoRight(maze)).get(posY));
-            maze.getGrid().get(availableGoRight(maze)).get(posY).setAvailable(true);
-        }
-        if( maze.getGrid().get(posX).get(availableGoDown(maze)) != maze.getGrid().get(posX).get(posY)) {
-            availableTiles.add(maze.getGrid().get(posX).get(availableGoDown(maze)));
-            maze.getGrid().get(posX).get(availableGoDown(maze)).setAvailable(true);
-        }
-        if( maze.getGrid().get(availableGoLeft(maze)).get(posY) != maze.getGrid().get(posX).get(posY)){
-            availableTiles.add(maze.getGrid().get(availableGoLeft(maze)).get(posY));
-            maze.getGrid().get(availableGoLeft(maze)).get(posY).setAvailable(true);
-        }*/
         return availableTiles;
     }
 

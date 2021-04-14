@@ -30,12 +30,12 @@ public class DrawMaze {
 
         if (tile.isAvailable()){
             g.setColor(Color.YELLOW);
-            g.fillRect(posX + 5, posY + 5, 5, 5);
+            g.fillRect(posX + 5, posY + 5, 10, 10);
         }
 
         if (tile.isEnd()) {
             g.setColor(Color.BLUE);
-            g.fillRect(posX + 5, posY + 5, 5, 5);
+            g.fillRect(posX + 5, posY + 5, 10, 10);
         }
         g.setColor(Color.black);
         if (tile.isBottomWall()) {
