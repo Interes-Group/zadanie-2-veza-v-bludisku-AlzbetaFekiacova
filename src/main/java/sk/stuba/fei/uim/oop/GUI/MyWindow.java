@@ -1,35 +1,36 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.GUI;
+
+import sk.stuba.fei.uim.oop.Game.Game;
+import sk.stuba.fei.uim.oop.IO.ArrowKeys;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MyWindow {
-    private int sizeX = 600;
-    private int sizeY = 300;
+
 
     public MyWindow(Game game, JLabel numberOfGames) {
+        final int SIZE_X = 600;
+        final int SIZE_Y = 300;
 
         MyCanvas myCanvas = new MyCanvas(game);
         JFrame window = new JFrame();
-        window.setSize(sizeX, sizeY);
+        window.setSize(SIZE_X, SIZE_Y);
+
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false); // prevent from being resized
+        window.setResizable(false);
         window.setLayout(new BorderLayout());
-        window.setTitle("Maze Game");
+        window.setTitle("TOWER IN A MAZE GAME");
         window.setLayout(null);
-
         window.setFocusable(true);
 
         GridPanel gridPanel = new GridPanel(game, myCanvas);
         GamePanel gamePanel = new GamePanel(game, myCanvas, numberOfGames, gridPanel);
         window.add(gamePanel);
         window.add(gridPanel);
-        ArrowKeys arrowKeys = new ArrowKeys(game,myCanvas);
+        ArrowKeys arrowKeys = new ArrowKeys(game, myCanvas);
         window.addKeyListener(arrowKeys);
-
-
-        //window.addKeyListener(gridPanel);
 
 
     }

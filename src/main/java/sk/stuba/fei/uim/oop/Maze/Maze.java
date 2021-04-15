@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.Maze;
 
 import java.awt.*;
 import java.util.ArrayList;

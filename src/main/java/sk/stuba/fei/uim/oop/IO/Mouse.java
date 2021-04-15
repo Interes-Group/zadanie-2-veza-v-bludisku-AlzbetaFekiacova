@@ -1,10 +1,13 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.IO;
+
+import sk.stuba.fei.uim.oop.Exceptions.GameEnded;
+import sk.stuba.fei.uim.oop.Game.Game;
+import sk.stuba.fei.uim.oop.Maze.Tile;
+import sk.stuba.fei.uim.oop.GUI.MyCanvas;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 import static java.lang.Math.abs;
 
@@ -29,15 +32,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
         if (game.getPlayer().isPositionInRadius(e.getX(), e.getY()) ){
             clicked = true;
             game.getPlayer().fillAvailableMoves(game.getMaze());
-            //availableTiles = game.getPlayer().availableMoves(game.getMaze());
-            //System.out.println(game.getPlayer().getAvailableMovements().size());
-            /*
-            for(Tile t: availableTiles){
-                System.out.println("Pos x = " + t.getX());
-                System.out.println("Pos y = " + t.getY());
-            }*/
-            //canvas.repaint();
-            System.out.println("Yes");
+
         }
         else if(clicked && onPosition){
             int direction = game.getPlayer().getAvailableMovements().get(tile);
@@ -46,7 +41,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
             for (int i = 0; i < numbOfMoves; i++) {
                 try {
-                    game.playerMove(direction);
+                    game.oneMove(direction);
 
                 }
                 catch (GameEnded gameEnded) {

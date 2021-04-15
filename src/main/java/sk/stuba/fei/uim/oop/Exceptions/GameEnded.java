@@ -1,4 +1,7 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.Exceptions;
+
+import sk.stuba.fei.uim.oop.Game.Game;
+import sk.stuba.fei.uim.oop.Maze.Maze;
 
 import javax.swing.*;
 

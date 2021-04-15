@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.Maze;
 
 import java.awt.*;
 
@@ -28,9 +28,10 @@ public class DrawMaze {
             posY = posY * maze.getSize();
         }
 
+
         if (tile.isAvailable()){
             g.setColor(Color.YELLOW);
-            g.fillRect(posX + 5, posY + 5, 10, 10);
+            g.fillOval(posX + 5, posY + 5, 10, 10);
         }
 
         if (tile.isEnd()) {

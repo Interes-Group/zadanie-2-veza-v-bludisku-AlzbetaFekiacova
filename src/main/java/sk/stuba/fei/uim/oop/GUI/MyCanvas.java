@@ -1,8 +1,11 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.GUI;
+
+import sk.stuba.fei.uim.oop.Game.Game;
+import sk.stuba.fei.uim.oop.IO.Mouse;
 
 import java.awt.*;
 
-public class MyCanvas extends Canvas  {
+public class MyCanvas extends Canvas {
     private Game game;
 
 

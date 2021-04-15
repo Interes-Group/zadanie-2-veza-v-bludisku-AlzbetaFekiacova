@@ -1,6 +1,7 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.Maze;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tile {
     private int x;
@@ -13,7 +14,12 @@ public class Tile {
     private boolean isEnd;
     private int size;
     private boolean isAvailable;
+    private Map<Tile, String> unvisitedNeighbours;
 
+
+    public Map<Tile, String> getUnvisitedNeighbours() {
+        return unvisitedNeighbours;
+    }
 
     public Tile(int x, int y) {
         this.x = x;
@@ -26,6 +32,7 @@ public class Tile {
         isEnd = false;
         size = 20;
         isAvailable = false;
+        unvisitedNeighbours = new HashMap<>();
     }
 
     public boolean isAvailable() {
@@ -53,6 +60,10 @@ public class Tile {
 
     }
 
+    public void clearNeighbours(){
+        this.unvisitedNeighbours.clear();
+    }
+
     public void breakLeftWall() {
         this.leftWall = false;
     }
@@ -78,45 +89,29 @@ public class Tile {
     }
 
 
-    public ArrayList<Tile> checkNeighbours(Maze maze) {
-        ArrayList<Tile> neighbours = new ArrayList<>();
-        Tile right = null;
-        Tile left = null;
-        Tile bottom = null;
-        Tile top = null;
-        if (isValidXRight(maze)) {
-            right = maze.getGrid().get(x + 1).get(y);
-        }
-        if (isValidXLeft(maze)) {
-            left = maze.getGrid().get(x - 1).get(y);
-        }
+    //public ArrayList<Tile> checkNeighbours(Maze maze) {
+    public void fillNeighbours(Maze maze) {
+
         if (isValidYTop(maze)) {
-            top = maze.getGrid().get(x).get(y - 1);
+            if (!maze.getGrid().get(x).get(y - 1).isVisited()) {
+                unvisitedNeighbours.put(maze.getGrid().get(x).get(y - 1), "top");
+            }
+        }
+        if (isValidXRight(maze)) {
+            if (!maze.getGrid().get(x + 1).get(y).isVisited()) {
+                unvisitedNeighbours.put(maze.getGrid().get(x + 1).get(y), "right");
+            }
         }
         if (isValidYBottom(maze)) {
-            bottom = maze.getGrid().get(x).get(y + 1);
-        }
-        if (top != null) {
-            if (!top.isVisited()) {
-                neighbours.add(top);
+            if (!maze.getGrid().get(x).get(y + 1).isVisited()) {
+                unvisitedNeighbours.put(maze.getGrid().get(x).get(y + 1), "bottom");
             }
         }
-        if (right != null) {
-            if (!right.isVisited()) {
-                neighbours.add(right);
+        if (isValidXLeft(maze)) {
+            if (!maze.getGrid().get(x - 1).get(y).isVisited()) {
+                unvisitedNeighbours.put(maze.getGrid().get(x - 1).get(y), "left");
             }
         }
-        if (bottom != null) {
-            if (!bottom.isVisited()) {
-                neighbours.add(bottom);
-            }
-        }
-        if (left != null) {
-            if (!left.isVisited()) {
-                neighbours.add(left);
-            }
-        }
-        return neighbours;
     }
 
 

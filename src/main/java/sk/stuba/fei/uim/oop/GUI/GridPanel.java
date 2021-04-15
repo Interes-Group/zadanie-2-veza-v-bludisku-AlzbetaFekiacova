@@ -1,13 +1,11 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.GUI;
 
-import lombok.SneakyThrows;
+import sk.stuba.fei.uim.oop.Game.Game;
+import sk.stuba.fei.uim.oop.Game.Player;
+import sk.stuba.fei.uim.oop.Maze.Maze;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class GridPanel extends JPanel {
     private int sizeX;

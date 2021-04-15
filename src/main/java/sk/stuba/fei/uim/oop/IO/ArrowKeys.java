@@ -1,10 +1,11 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.IO;
 
-import javax.net.ssl.KeyManager;
+import sk.stuba.fei.uim.oop.Exceptions.GameEnded;
+import sk.stuba.fei.uim.oop.Game.Game;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class ArrowKeys extends KeyAdapter {
     private Game game;
@@ -20,7 +21,7 @@ public class ArrowKeys extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         try {
-            game.playerMove(code);
+            game.oneMove(code);
 
         } catch (GameEnded gameEnded) {
 
