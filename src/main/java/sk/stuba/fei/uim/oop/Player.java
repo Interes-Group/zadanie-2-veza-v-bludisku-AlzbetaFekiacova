@@ -1,7 +1,11 @@
 package sk.stuba.fei.uim.oop;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 import static java.lang.Math.abs;
@@ -156,27 +160,28 @@ public class Player {
     }
 
 
-    public ArrayList<Tile> availableMoves(Maze maze) {
-        ArrayList<Tile> availableTiles = new ArrayList<>();
+    public Map<Tile, Integer> availableMoves(Maze maze) {
+        //ArrayList<Tile> availableTiles = new ArrayList<>();
+        Map<Tile, Integer> availableTiles= new HashMap<>();
         Tile t = getAvailableUp(maze);
         if (t != null) {
             //t.setAvailable(true);
-            availableTiles.add(t);
+            availableTiles.put(t, KeyEvent.VK_UP);
         }
         t = getAvailableRight(maze);
         if (t != null) {
             //t.setAvailable(true);
-            availableTiles.add(t);
+            availableTiles.put(t, KeyEvent.VK_RIGHT);
         }
         t = getAvailableDown(maze);
         if (t != null) {
             //t.setAvailable(true);
-            availableTiles.add(t);
+            availableTiles.put(t, KeyEvent.VK_DOWN);
         }
         t = getAvailableLeft(maze);
         if (t != null) {
             //t.setAvailable(true);
-            availableTiles.add(t);
+            availableTiles.put(t, KeyEvent.VK_LEFT);
         }
 
         return availableTiles;
