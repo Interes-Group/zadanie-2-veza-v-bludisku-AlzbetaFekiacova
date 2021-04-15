@@ -59,6 +59,7 @@ public class Game {
         if (maze.getGrid().get(player.getPosX()).get(player.getPosY()).isEnd()) {
             throw new GameEnded(this, false, numberOfGames);
         }
+        player.clearAvailableMoves();
 
     }
 

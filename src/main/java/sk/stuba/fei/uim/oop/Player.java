@@ -2,8 +2,6 @@ package sk.stuba.fei.uim.oop;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +15,14 @@ public class Player {
     private int posXonCanvas;
     private int posYonCanvas;
 
+    private Map<Tile, Integer> availableMovements;
+
     public Player() {
         posX = 0;
         posY = 0;
         posXonCanvas = 28;
         posYonCanvas = 28;
+        this.availableMovements = new HashMap<>();
     }
 
 
@@ -123,70 +124,68 @@ public class Player {
 
     }
 
-    private Tile getAvailableUp(Maze maze) {
+    private void getAvailableUp(Maze maze) {
         Tile t = null;
         int u = availableGoUp(maze);
         if (u != posY) {
             t = maze.getGrid().get(posX).get(u);
+            availableMovements.put(t, KeyEvent.VK_UP);
         }
-        return t;
     }
 
-    private Tile getAvailableRight(Maze maze) {
+    private void getAvailableRight(Maze maze) {
         Tile t = null;
         int r = availableGoRight(maze);
         if (r != posX) {
             t = maze.getGrid().get(r).get(posY);
+            availableMovements.put(t, KeyEvent.VK_RIGHT);
         }
-        return t;
+
     }
 
-    private Tile getAvailableDown(Maze maze) {
+    private void getAvailableDown(Maze maze) {
         Tile t = null;
         int d = availableGoDown(maze);
         if (d != posY) {
             t = maze.getGrid().get(posX).get(d);
+            availableMovements.put(t, KeyEvent.VK_DOWN);
         }
-        return t;
+
     }
 
-    private Tile getAvailableLeft(Maze maze) {
+    private void getAvailableLeft(Maze maze) {
         Tile t = null;
         int l = availableGoLeft(maze);
         if (l != posX) {
             t = maze.getGrid().get(l).get(posY);
+            availableMovements.put(t, KeyEvent.VK_LEFT);
         }
-        return t;
+
     }
 
 
-    public Map<Tile, Integer> availableMoves(Maze maze) {
-        //ArrayList<Tile> availableTiles = new ArrayList<>();
-        Map<Tile, Integer> availableTiles= new HashMap<>();
-        Tile t = getAvailableUp(maze);
-        if (t != null) {
-            //t.setAvailable(true);
-            availableTiles.put(t, KeyEvent.VK_UP);
-        }
-        t = getAvailableRight(maze);
-        if (t != null) {
-            //t.setAvailable(true);
-            availableTiles.put(t, KeyEvent.VK_RIGHT);
-        }
-        t = getAvailableDown(maze);
-        if (t != null) {
-            //t.setAvailable(true);
-            availableTiles.put(t, KeyEvent.VK_DOWN);
-        }
-        t = getAvailableLeft(maze);
-        if (t != null) {
-            //t.setAvailable(true);
-            availableTiles.put(t, KeyEvent.VK_LEFT);
-        }
-
-        return availableTiles;
+    public void fillAvailableMoves(Maze maze) {
+        fillAvailableGoUp(maze);
+        fillAvailableGoRight(maze);
+        fillAvailableGoDown(maze);
+        fillAvailableGoLeft(maze);
+        /*
+        getAvailableUp(maze);
+        getAvailableRight(maze);
+        getAvailableLeft(maze);
+        getAvailableDown(maze);*/
     }
 
+    private void fillAvailableGoUp(Maze maze){
+        int posTileY = posY;
+        while (true){
+            if(isValidMoveUP(posTileY, maze)){
+                posTileY -= 1;
+                availableMovements.put(maze.getGrid().get(posX).get(posTileY), KeyEvent.VK_UP);
+            }
+            else break;
+        }
+    }
 
     private int availableGoUp(Maze maze) {
         int posTileY = posY;
@@ -198,6 +197,26 @@ public class Player {
         return posTileY;
     }
 
+
+    public void clearAvailableMoves(){
+        availableMovements.clear();
+    }
+
+
+    public Map<Tile, Integer> getAvailableMovements() {
+        return availableMovements;
+    }
+    private void fillAvailableGoRight(Maze maze){
+        int posTileX = posX;
+        while (true){
+            if(isValidMoveRight(posTileX, maze)){
+                posTileX += 1;
+                availableMovements.put(maze.getGrid().get(posTileX).get(posY), KeyEvent.VK_RIGHT);
+            }
+            else break;
+        }
+    }
+
     private int availableGoRight(Maze maze) {
         int posTileX = posX;
         while (true) {
@@ -207,7 +226,16 @@ public class Player {
         }
         return posTileX;
     }
-
+    private void fillAvailableGoDown(Maze maze){
+        int posTileY = posY;
+        while (true){
+            if(isValidMoveDown(posTileY, maze)){
+                posTileY += 1;
+                availableMovements.put(maze.getGrid().get(posX).get(posTileY), KeyEvent.VK_DOWN);
+            }
+            else break;
+        }
+    }
     private int availableGoDown(Maze maze) {
         int posTileY = posY;
         while (true) {
@@ -216,6 +244,16 @@ public class Player {
             } else break;
         }
         return posTileY;
+    }
+    private void fillAvailableGoLeft(Maze maze){
+        int posTileX = posX;
+        while (true){
+            if(isValidMoveLeft(posTileX, maze)){
+                posTileX -= 1;
+                availableMovements.put(maze.getGrid().get(posTileX).get(posY), KeyEvent.VK_LEFT);
+            }
+            else break;
+        }
     }
 
     private int availableGoLeft(Maze maze) {

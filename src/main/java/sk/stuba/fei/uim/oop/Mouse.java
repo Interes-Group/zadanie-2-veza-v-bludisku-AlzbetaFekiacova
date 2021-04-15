@@ -3,7 +3,6 @@ package sk.stuba.fei.uim.oop;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     private Game game;
     private MyCanvas canvas;
-    private Map<Tile, Integer> availableTiles;
     private boolean clicked = false;
     private boolean onPosition = false;
     private Tile tile;
@@ -22,7 +20,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
         super();
         this.game = game;
         this.canvas = canvas;
-        this.availableTiles = new HashMap<>();
         this.tile = null;
     }
 
@@ -31,8 +28,9 @@ public class Mouse implements MouseListener, MouseMotionListener {
         System.out.println(game.getPlayer().getPosXonCanvas() + " " + game.getPlayer().getPosYonCanvas() );
         if (game.getPlayer().isPositionInRadius(e.getX(), e.getY()) ){
             clicked = true;
-            availableTiles = game.getPlayer().availableMoves(game.getMaze());
-            System.out.println(availableTiles.size());
+            game.getPlayer().fillAvailableMoves(game.getMaze());
+            //availableTiles = game.getPlayer().availableMoves(game.getMaze());
+            //System.out.println(game.getPlayer().getAvailableMovements().size());
             /*
             for(Tile t: availableTiles){
                 System.out.println("Pos x = " + t.getX());
@@ -41,6 +39,33 @@ public class Mouse implements MouseListener, MouseMotionListener {
             //canvas.repaint();
             System.out.println("Yes");
         }
+        else if(clicked && onPosition){
+            int direction = game.getPlayer().getAvailableMovements().get(tile);
+            int numbOfMoves = abs(game.getPlayer().getPosX() - tile.getX()) + abs(game.getPlayer().getPosY() - tile.getY());
+
+
+            for (int i = 0; i < numbOfMoves; i++) {
+                try {
+                    game.playerMove(direction);
+
+                }
+                catch (GameEnded gameEnded) {
+
+                }
+            }
+            game.getMaze().getGrid().get(tile.getX()).get(tile.getY()).setAvailable(false);
+            //game.getPlayer().clearAvailableMoves();
+            canvas.repaint();
+            clicked = false;
+            onPosition = false;
+        }
+        else if(game.getPlayer().getAvailableMovements().size() == 0){
+            clicked = false;
+            onPosition = false;
+        }
+
+
+        /*
         else if(clicked && onPosition){
             int direction = availableTiles.get(tile);
             int numbOfMoves = abs(game.getPlayer().getPosX() - tile.getX()) + abs(game.getPlayer().getPosY() - tile.getY());
@@ -62,7 +87,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
         else {
             System.out.println("No");
         }
-
+        */
 
     }
 
@@ -101,7 +126,30 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        //System.out.println("mouse mooved");
+        if(game.getPlayer().getAvailableMovements().size()!=0){
+            for(Tile t: game.getPlayer().getAvailableMovements().keySet()) {
+
+                int posX = ((t.getX()) * 20) + 28;
+                int posY = ((t.getY()) * 20) + 28;
+
+                if (abs(e.getX() - posX) <= 5 && abs(e.getY() - posY) <= 5) {
+                    game.getMaze().getGrid().get(t.getX()).get(t.getY()).setAvailable(true);
+                    onPosition = true;
+                    tile = t;
+
+                }
+                else {
+                    game.getMaze().getGrid().get(t.getX()).get(t.getY()).setAvailable(false);
+
+                }
+                if (onPosition) {
+                    canvas.repaint();
+                }
+            }
+
+        }
+
+        /*
         if(availableTiles.size()!=0) {
             System.out.println("uz si klikol");
             for (Tile t : availableTiles.keySet()) {
@@ -125,10 +173,13 @@ public class Mouse implements MouseListener, MouseMotionListener {
                     game.getMaze().getGrid().get(t.getX()).get(t.getY()).setAvailable(false);
 
                 }
-                canvas.repaint();
+                if (onPosition) {
+                    canvas.repaint();
+                }
 
             }
         }
-
+*/
     }
+
 }
