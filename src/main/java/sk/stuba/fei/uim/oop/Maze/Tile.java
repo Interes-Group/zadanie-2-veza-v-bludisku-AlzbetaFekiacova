@@ -89,7 +89,6 @@ public class Tile {
     }
 
 
-    //public ArrayList<Tile> checkNeighbours(Maze maze) {
     public void fillNeighbours(Maze maze) {
 
         if (isValidYTop(maze)) {

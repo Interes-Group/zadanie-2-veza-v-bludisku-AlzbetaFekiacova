@@ -79,6 +79,7 @@ public class GenerateMaze {
         while (x == 0) {
             x = rand.nextInt(maze.getRows());
         }
+
         int y = rand.nextInt(maze.getCols());
         while (y == 0) {
             y = rand.nextInt(maze.getCols());

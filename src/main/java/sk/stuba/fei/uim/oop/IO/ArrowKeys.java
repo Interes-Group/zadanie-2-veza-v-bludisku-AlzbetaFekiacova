@@ -27,6 +27,5 @@ public class ArrowKeys extends KeyAdapter {
 
         }
         canvas.repaint();
-        System.out.println("repainted");
     }
 }
