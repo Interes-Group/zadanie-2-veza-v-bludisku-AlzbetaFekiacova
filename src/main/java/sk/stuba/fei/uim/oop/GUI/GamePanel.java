@@ -28,18 +28,18 @@ public class GamePanel extends JPanel {
         this.setFocusable(false);
 
 
-        reset = new MyButton("RESET", 100, 10, 100, 25, -1, game, canvas, games);
-        up = new MyButton("UP", 100, 60, 100, 25, KeyEvent.VK_UP, game, canvas, games);
-        right = new MyButton("RIGHT", 200, 90, 100, 25, KeyEvent.VK_RIGHT, game, canvas, games);
+        reset = new MyButton("RESET", 100, 40, 80, 25, -1, game, canvas, games);
+        up = new MyButton("UP", 100, 90, 80, 25, KeyEvent.VK_UP, game, canvas, games);
+        right = new MyButton("RIGHT", 185, 120, 80, 25, KeyEvent.VK_RIGHT, game, canvas, games);
 
-        down = new MyButton("DOWN", 100, 130, 100, 25, KeyEvent.VK_DOWN, game, canvas, games);
+        down = new MyButton("DOWN", 100, 120, 80, 25, KeyEvent.VK_DOWN, game, canvas, games);
 
 
-        left = new MyButton("LEFT", 0, 90, 100, 25, KeyEvent.VK_LEFT, game, canvas, games);
+        left = new MyButton("LEFT", 15, 120, 80, 25, KeyEvent.VK_LEFT, game, canvas, games);
 
 
         games = numberOfGames;
-        games.setBounds(20, 170, 2000, 25);
+        games.setBounds(30, 170, 270, 25);
 
         this.add(reset);
 

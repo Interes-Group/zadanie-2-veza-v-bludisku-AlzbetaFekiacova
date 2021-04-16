@@ -10,6 +10,8 @@ public class GameEnded extends Exception {
     public GameEnded(Game game, Boolean reset, JLabel games) {
         game.getPlayer().setPosX(0);
         game.getPlayer().setPosY(0);
+        game.getPlayer().setPosXonCanvas(28);
+        game.getPlayer().setPosYonCanvas(28);
         int rows = game.getMaze().getRows();
         int cols = game.getMaze().getCols();
         game.setMaze(new Maze(rows, cols));

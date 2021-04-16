@@ -28,6 +28,13 @@ public class Player {
         this.availableMovements = new HashMap<>();
     }
 
+    public void setPosXonCanvas(int posXonCanvas) {
+        this.posXonCanvas = posXonCanvas;
+    }
+
+    public void setPosYonCanvas(int posYonCanvas) {
+        this.posYonCanvas = posYonCanvas;
+    }
 
     public boolean isPositionInRadius(int x, int y) {
         int a = abs(posXonCanvas - x);

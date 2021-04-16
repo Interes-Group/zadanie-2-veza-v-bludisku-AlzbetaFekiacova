@@ -64,13 +64,10 @@ public class Mouse implements MouseListener, MouseMotionListener {
         else if(clicked && onPosition){
             int direction = availableTiles.get(tile);
             int numbOfMoves = abs(game.getPlayer().getPosX() - tile.getX()) + abs(game.getPlayer().getPosY() - tile.getY());
-
             for (int i = 0; i < numbOfMoves; i++) {
                 try {
                     game.playerMove(direction);
-
                 } catch (GameEnded gameEnded) {
-
                 }
             }
             game.getMaze().getGrid().get(tile.getX()).get(tile.getY()).setAvailable(false);
@@ -89,7 +86,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("Click");
-       mouseClick(e);
+        mouseClick(e);
     }
 
     @Override
@@ -154,27 +151,24 @@ public class Mouse implements MouseListener, MouseMotionListener {
                 int posX = ((t.getX()) * 20) + 28;
                 //System.out.println(posX);
                 //System.out.println("Myska y = " + e.getY());
-
                 int posY = ((t.getY()) * 20) + 28;
                 //System.out.println(posY);
-
                 if (abs(e.getX() - posX) <= 5 && abs(e.getY() - posY) <= 5) {
                     //System.out.println("je");
                     game.getMaze().getGrid().get(t.getX()).get(t.getY()).setAvailable(true);
                     onPosition = true;
                     tile = t;
-
                 } else {
                     game.getMaze().getGrid().get(t.getX()).get(t.getY()).setAvailable(false);
-
                 }
                 if (onPosition) {
                     canvas.repaint();
                 }
-
             }
         }
 */
     }
 
 }
+
+

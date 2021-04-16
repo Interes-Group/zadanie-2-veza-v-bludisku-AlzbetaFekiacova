@@ -4,6 +4,8 @@ import sk.stuba.fei.uim.oop.Exceptions.GameEnded;
 import sk.stuba.fei.uim.oop.Game.Game;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +26,8 @@ public class MyButton extends JButton implements ActionListener {
         this.games = games;
         addActionListener(this);
         setFocusable(false);
+        setBorderPainted(true);
+        setBackground(Color.WHITE);
 
 
 
