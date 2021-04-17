@@ -27,9 +27,15 @@ public class Maze {
     }
 
     public void drawMaze(Graphics g) {
-        DrawMaze dr = new DrawMaze(this, g);
 
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Tile t = grid.get(i).get(j);
+                t.drawTile(this, g);
+            }
+        }
     }
+
 
     public void makeGrid() {
         for (int i = 0; i < rows; i++) {

@@ -16,9 +16,9 @@ public class GamePanel extends JPanel {
     private MyButton left;
     private JLabel games;
     private Game game;
-    private GridPanel gridPanel;
 
-    public GamePanel(Game game, MyCanvas canvas, JLabel numberOfGames, GridPanel grid) {
+
+    public GamePanel(Game game, MyCanvas canvas, JLabel numberOfGames) {
 
         this.canvas = canvas;
         this.game = game;
@@ -48,7 +48,5 @@ public class GamePanel extends JPanel {
         this.add(down);
         this.add(left);
         this.add(games);
-        gridPanel = grid;
-
     }
 }

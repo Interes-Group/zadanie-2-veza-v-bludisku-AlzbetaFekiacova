@@ -26,7 +26,7 @@ public class MyWindow {
         window.setFocusable(true);
 
         GridPanel gridPanel = new GridPanel(game, myCanvas);
-        GamePanel gamePanel = new GamePanel(game, myCanvas, numberOfGames, gridPanel);
+        GamePanel gamePanel = new GamePanel(game, myCanvas, numberOfGames);
         window.add(gamePanel);
         window.add(gridPanel);
         ArrowKeys arrowKeys = new ArrowKeys(game, myCanvas);

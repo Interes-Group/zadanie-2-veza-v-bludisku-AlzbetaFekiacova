@@ -34,8 +34,4 @@ public class GridPanel extends JPanel {
 
     }
 
-    public MyCanvas getCanvas() {
-        return canvas;
-    }
-
 }

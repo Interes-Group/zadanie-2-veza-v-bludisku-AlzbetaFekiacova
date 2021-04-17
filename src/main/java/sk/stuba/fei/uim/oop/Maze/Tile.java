@@ -1,5 +1,6 @@
 package sk.stuba.fei.uim.oop.Maze;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public class Tile {
     private boolean leftWall;
     private boolean bottomWall;
     private boolean isEnd;
-    private int size;
+    private int wallLength;
     private boolean isAvailable;
     private Map<Tile, String> unvisitedNeighbours;
 
@@ -30,9 +31,19 @@ public class Tile {
         leftWall = true;
         bottomWall = true;
         isEnd = false;
-        size = 20;
+        wallLength = 20;
         isAvailable = false;
         unvisitedNeighbours = new HashMap<>();
+    }
+
+
+
+    public int posXonCanvas() {
+        return (x * 20) + 28;
+    }
+
+    public int posYonCanvas() {
+        return (y * 20) + 28;
     }
 
     public boolean isAvailable() {
@@ -168,5 +179,61 @@ public class Tile {
 
     public void setBottomWall(boolean bottomWall) {
         this.bottomWall = bottomWall;
+    }
+
+    public void drawTile(Maze maze, Graphics g) {
+
+
+        int posX = x + 1;
+        if (posX > 0) {
+            posX = posX * maze.getSize();
+        }
+        int posY = y + 1;
+        if (posY > 0) {
+            posY = posY * maze.getSize();
+        }
+
+
+        if (isAvailable()){
+            g.setColor(Color.YELLOW);
+            g.fillOval(posX + 5, posY + 5, 10, 10);
+        }
+
+        if (isEnd()) {
+            g.setColor(Color.BLUE);
+            g.fillRect(posX + 5, posY + 5, 10, 10);
+        }
+        g.setColor(Color.black);
+        if (isBottomWall()) {
+            drawBottomWall(g, posX, posY);
+        }
+        if (isTopWall()) {
+            drawTopWall(g, posX, posY);
+        }
+        if (isLeftWall()) {
+            drawLeftWall(g, posX, posY);
+        }
+        if (isRightWall()) {
+            drawRightWall(g, posX, posY);
+        }
+    }
+
+    public void drawRightWall(Graphics g, int posX, int posY) {
+
+        g.drawLine(posX + wallLength, posY, posX + wallLength, posY + wallLength);
+    }
+
+    public void drawTopWall(Graphics g, int posX, int posY) {
+
+    g.drawLine(posX, posY, posX + wallLength, posY);
+    }
+
+    public void drawBottomWall(Graphics g, int posX, int posY) {
+        g.drawLine(posX, posY + wallLength, posX + wallLength, posY + wallLength);
+
+    }
+
+    public void drawLeftWall(Graphics g, int posX, int posY) {
+        g.drawLine(posX, posY, posX, posY + wallLength);
     }
 }

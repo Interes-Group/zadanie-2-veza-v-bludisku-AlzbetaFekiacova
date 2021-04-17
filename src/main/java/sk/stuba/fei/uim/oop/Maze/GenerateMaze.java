@@ -1,5 +1,6 @@
 package sk.stuba.fei.uim.oop.Maze;
 
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
 
@@ -7,14 +8,14 @@ public class GenerateMaze {
     private Maze maze;
     private Random rand;
 
-    private void breakWalls(Tile current, Tile next, String dirrection) {
-        if (dirrection.equals("top")) {
+    private void breakWalls(Tile current, Tile next, String direction) {
+        if (direction.equals("top")) {
             current.breakTopWall();
             next.breakBottomWall();
-        } else if (dirrection.equals("right")) {
+        } else if (direction.equals("right")) {
             current.breakRightWall();
             next.breakLeftWall();
-        } else if (dirrection.equals("bottom")) {
+        } else if (direction.equals("bottom")) {
             current.breakBottomWall();
             next.breakTopWall();
         } else {
@@ -25,12 +26,16 @@ public class GenerateMaze {
     }
 
     private String getDirection(Tile current, Tile next) {
-        for (Tile t : current.getUnvisitedNeighbours().keySet()) {
+        Tile t;
+        String s = "";
+        for (Tile tile : current.getUnvisitedNeighbours().keySet()) {
+            t = tile;
             if (t.equals(next)) {
-                return current.getUnvisitedNeighbours().get(t);
+                s = current.getUnvisitedNeighbours().get(t);
+                break;
             }
         }
-        return null;
+        return s;
     }
 
 
@@ -64,13 +69,19 @@ public class GenerateMaze {
     private Tile getRandomTile(Tile tile) {
         int randomIndex = rand.nextInt(tile.getUnvisitedNeighbours().size());
         int i = 0;
-        for (Tile t : tile.getUnvisitedNeighbours().keySet()) {
+        Tile t = new Tile(-1, -1);
+
+
+        for (Tile value : tile.getUnvisitedNeighbours().keySet()) {
             if (i == randomIndex) {
-                return t;
+                t = value;
+                break;
             }
             i++;
         }
-        return null;
+
+        return t;
+
     }
 
 

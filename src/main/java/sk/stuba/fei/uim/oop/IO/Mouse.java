@@ -7,7 +7,6 @@ import sk.stuba.fei.uim.oop.GUI.MyCanvas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import static java.lang.Math.abs;
@@ -30,16 +29,23 @@ public class Mouse extends MouseAdapter implements MouseMotionListener {
         this.clicked = false;
     }
 
+
+    private boolean isPositionInRadius(int x, int y, MouseEvent e) {
+        int a = abs(e.getX() - x);
+        int b = abs(e.getY() - y);
+        return a <= 5 && b <= 5;
+    }
+
+
     private void mouseClick(MouseEvent e) {
 
-        if (game.getPlayer().isPositionInRadius(e.getX(), e.getY()) && !clicked) {
+        if(isPositionInRadius(game.getPlayer().posXonCanvas(), game.getPlayer().posYonCanvas(), e) && !clicked){
+
             clicked = true;
 
         } else if (clicked && onPosition && game.getPlayer().getAvailableMovements().size() != 0) {
-            int posX = ((tile.getX()) * 20) + 28;
-            int posY = ((tile.getY()) * 20) + 28;
 
-            if (abs(e.getX() - posX) <= 5 && abs(e.getY() - posY) <= 5) {
+            if (isPositionInRadius(tile.posXonCanvas(), tile.posYonCanvas(), e)) {
 
 
                 int direction = game.getPlayer().getAvailableMovements().get(tile);
@@ -78,10 +84,7 @@ public class Mouse extends MouseAdapter implements MouseMotionListener {
             game.getPlayer().fillAvailableMoves(game.getMaze());
             for(Tile t: game.getPlayer().getAvailableMovements().keySet()) {
 
-                int posX = ((t.getX()) * 20) + 28;
-                int posY = ((t.getY()) * 20) + 28;
-
-                if (abs(e.getX() - posX) <= 5 && abs(e.getY() - posY) <= 5) {
+                if(isPositionInRadius(t.posXonCanvas(), t.posYonCanvas(), e)){
                     game.getMaze().getGrid().get(t.getX()).get(t.getY()).setAvailable(true);
                     onPosition = true;
                     tile = t;

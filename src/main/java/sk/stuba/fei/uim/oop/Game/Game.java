@@ -11,19 +11,21 @@ public class Game {
     private Player player;
     private Maze maze;
     private int successfulGames;
-    private JLabel numberOfGames;
+    private JLabel numberOfGamesText;
 
     public Game() {
 
         player = new Player();
         maze = new Maze(11, 11);
         successfulGames = 0;
-        numberOfGames = new JLabel("Number of successful games played: " + getSuccessfulGames());
-        MyWindow window = new MyWindow(this, numberOfGames);
+        numberOfGamesText = new JLabel("Number of successful games played: " + getSuccessfulGames());
+        MyWindow window = new MyWindow(this, numberOfGamesText);
 
     }
 
-
+    public void resetSuccessfulGames() {
+        this.successfulGames = 0;
+    }
 
     public int getSuccessfulGames() {
 
@@ -52,7 +54,7 @@ public class Game {
         }
 
         if (maze.getGrid().get(player.getPosX()).get(player.getPosY()).isEnd()) {
-            throw new GameEnded(this, false, numberOfGames);
+            throw new GameEnded(this, false);
         }
         player.clearAvailableMoves();
 
@@ -69,5 +71,9 @@ public class Game {
 
     public void setMaze(Maze maze) {
         this.maze = maze;
+    }
+
+    public JLabel getNumberOfGamesText() {
+        return numberOfGamesText;
     }
 }

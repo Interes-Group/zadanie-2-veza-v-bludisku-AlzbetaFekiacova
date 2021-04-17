@@ -40,7 +40,7 @@ public class MyButton extends JButton implements ActionListener {
             if (action != -1) {
                 game.oneMove(action);
             } else {
-                throw new GameEnded(game, true, games);
+                throw new GameEnded(game, true);
             }
         } catch (GameEnded gameEnded) {
         }

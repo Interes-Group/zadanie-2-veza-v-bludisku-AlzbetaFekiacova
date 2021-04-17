@@ -8,47 +8,27 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-
-import static java.lang.Math.abs;
-
 public class Player {
     private int posX;
     private int posY;
-
-    private int posXonCanvas;
-    private int posYonCanvas;
 
     private Map<Tile, Integer> availableMovements;
 
     public Player() {
         posX = 0;
         posY = 0;
-        posXonCanvas = 28;
-        posYonCanvas = 28;
         this.availableMovements = new HashMap<>();
     }
 
-    public void setPosXonCanvas(int posXonCanvas) {
-        this.posXonCanvas = posXonCanvas;
+
+    public int posXonCanvas() {
+        return (posX * 20) + 28;
     }
 
-    public void setPosYonCanvas(int posYonCanvas) {
-        this.posYonCanvas = posYonCanvas;
+    public int posYonCanvas() {
+        return (posY * 20) + 28;
     }
 
-    public boolean isPositionInRadius(int x, int y) {
-        int a = abs(posXonCanvas - x);
-        int b = abs(posYonCanvas - y);
-        return a <= 5 && b <= 5;
-    }
-
-    public int getPosXonCanvas() {
-        return posXonCanvas;
-    }
-
-    public int getPosYonCanvas() {
-        return posYonCanvas;
-    }
 
     public void drawPlayer(Graphics g) {
         g.setColor(Color.GREEN);
@@ -75,28 +55,24 @@ public class Player {
     public void moveUp(Maze maze) {
         if (isValidMoveUP(posY, maze)) {
             posY -= 1;
-            posYonCanvas -= 20;
         }
     }
 
     public void moveDown(Maze maze) {
         if (isValidMoveDown(posY, maze)) {
             posY += 1;
-            posYonCanvas += 20;
         }
     }
 
     public void moveRight(Maze maze) {
         if (isValidMoveRight(posX, maze)) {
             posX += 1;
-            posXonCanvas += 20;
         }
     }
 
     public void moveLeft(Maze maze) {
         if (isValidMoveLeft(posX, maze)) {
             posX -= 1;
-            posXonCanvas -= 20;
         }
     }
 
