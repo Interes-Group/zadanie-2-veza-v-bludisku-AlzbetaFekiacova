@@ -1,43 +1,11 @@
 package sk.stuba.fei.uim.oop.Maze;
 
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
 
 public class GenerateMaze {
     private Maze maze;
     private Random rand;
-
-    private void breakWalls(Tile current, Tile next, String direction) {
-        if (direction.equals("top")) {
-            current.breakTopWall();
-            next.breakBottomWall();
-        } else if (direction.equals("right")) {
-            current.breakRightWall();
-            next.breakLeftWall();
-        } else if (direction.equals("bottom")) {
-            current.breakBottomWall();
-            next.breakTopWall();
-        } else {
-            current.breakLeftWall();
-            next.breakRightWall();
-        }
-
-    }
-
-    private String getDirection(Tile current, Tile next) {
-        Tile t;
-        String s = "";
-        for (Tile tile : current.getUnvisitedNeighbours().keySet()) {
-            t = tile;
-            if (t.equals(next)) {
-                s = current.getUnvisitedNeighbours().get(t);
-                break;
-            }
-        }
-        return s;
-    }
-
 
     public GenerateMaze(Maze maze) {
         Stack<Tile> stack;
@@ -66,6 +34,21 @@ public class GenerateMaze {
 
     }
 
+
+
+    private String getDirection(Tile current, Tile next) {
+        Tile t;
+        String s = "";
+        for (Tile tile : current.getUnvisitedNeighbours().keySet()) {
+            t = tile;
+            if (t.equals(next)) {
+                s = current.getUnvisitedNeighbours().get(t);
+                break;
+            }
+        }
+        return s;
+    }
+
     private Tile getRandomTile(Tile tile) {
         int randomIndex = rand.nextInt(tile.getUnvisitedNeighbours().size());
         int i = 0;
@@ -81,6 +64,28 @@ public class GenerateMaze {
         }
 
         return t;
+
+    }
+
+    private void breakWalls(Tile current, Tile next, String direction) {
+        switch (direction) {
+            case "top":
+                current.breakTopWall();
+                next.breakBottomWall();
+                break;
+            case "right":
+                current.breakRightWall();
+                next.breakLeftWall();
+                break;
+            case "bottom":
+                current.breakBottomWall();
+                next.breakTopWall();
+                break;
+            default:
+                current.breakLeftWall();
+                next.breakRightWall();
+                break;
+        }
 
     }
 

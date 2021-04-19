@@ -9,106 +9,156 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Player {
-    private int posX;
-    private int posY;
 
+    private Tile positionTile;
     private Map<Tile, Integer> availableMovements;
 
-    public Player() {
-        posX = 0;
-        posY = 0;
+    public Player(Maze maze) {
+
         this.availableMovements = new HashMap<>();
+        setPositionTile(maze.getGrid().get(0).get(0));
     }
 
 
-    public int posXonCanvas() {
-        return (posX * 20) + 28;
-    }
-
-    public int posYonCanvas() {
-        return (posY * 20) + 28;
+    public Tile getPositionTile() {
+        return positionTile;
     }
 
 
-    public void drawPlayer(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillRect((posX + 1) * 20 + 5, (posY + 1) * 20 + 5, 10, 10);
-
+    public void setPositionTile(Tile tile) {
+        this.positionTile = tile;
     }
 
     public int getPosX() {
-        return posX;
-    }
-
-    public void setPosX(int posX) {
-        this.posX = posX;
+        return positionTile.getX();
     }
 
     public int getPosY() {
-        return posY;
+        return positionTile.getY();
     }
 
-    public void setPosY(int posY) {
-        this.posY = posY;
+
+    public Map<Tile, Integer> getAvailableMovements() {
+        return availableMovements;
     }
 
+    public void drawPlayer(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillRect((getPosX() + 1) * 20 + 5, (getPosY() + 1) * 20 + 5, 10, 10);
+
+    }
     public void moveUp(Maze maze) {
-        if (isValidMoveUP(posY, maze)) {
-            posY -= 1;
-        }
-    }
 
-    public void moveDown(Maze maze) {
-        if (isValidMoveDown(posY, maze)) {
-            posY += 1;
+        if (isValidMoveUP(getPosY(), maze)) {
+            setPositionTile(maze.getGrid().get(getPosX()).get(getPosY() - 1));
         }
     }
 
     public void moveRight(Maze maze) {
-        if (isValidMoveRight(posX, maze)) {
-            posX += 1;
+
+        if (isValidMoveRight(getPosX(), maze)) {
+            setPositionTile(maze.getGrid().get(getPosX() + 1).get(getPosY()));
         }
     }
 
+
+
+    public void moveDown(Maze maze) {
+
+        if (isValidMoveDown(getPosY(), maze)) {
+            setPositionTile(maze.getGrid().get(getPosX()).get(getPosY() + 1));
+        }
+    }
+
+
     public void moveLeft(Maze maze) {
-        if (isValidMoveLeft(posX, maze)) {
-            posX -= 1;
+
+        if (isValidMoveLeft(getPosX(), maze)) {
+            setPositionTile(maze.getGrid().get(getPosX() - 1).get(getPosY()));
         }
     }
 
     private boolean isValidMoveUP(int y, Maze maze) {
-        if ((y - 1) >= 0) {
-            return !maze.getGrid().get(posX).get(y).isTopWall();
-        }
-        return false;
+        return maze.getGrid().get(getPosX()).get(y).isValidYTop() && !maze.getGrid().get(getPosX()).get(y).isTopWall();
+
 
     }
 
     private boolean isValidMoveRight(int x, Maze maze) {
-        if ((x + 1) < maze.getCols()) {
-            return !maze.getGrid().get(x).get(posY).isRightWall();
+        return maze.getGrid().get(x).get(getPosY()).isValidXRight(maze) && !maze.getGrid().get(x).get(getPosY()).isRightWall();
 
-        }
-        return false;
 
     }
 
     private boolean isValidMoveDown(int y, Maze maze) {
-        if ((y + 1) < maze.getRows()) {
-            return !maze.getGrid().get(posX).get(y).isBottomWall();
+        return maze.getGrid().get(getPosX()).get(y).isValidYBottom(maze) && !maze.getGrid().get(getPosX()).get(y).isBottomWall();
 
-        }
-        return false;
     }
 
     private boolean isValidMoveLeft(int x, Maze maze) {
-        if ((x - 1) >= 0) {
-            return !maze.getGrid().get(x).get(posY).isLeftWall();
-
-        }
-        return false;
+        return maze.getGrid().get(x).get(getPosY()).isValidXLeft() && !maze.getGrid().get(x).get(getPosY()).isLeftWall();
 
     }
+
+
+    private void fillAvailableGoUp(Maze maze) {
+
+        int posTileY = getPosY();
+        while (true) {
+            if (isValidMoveUP(posTileY, maze)) {
+                posTileY -= 1;
+                availableMovements.put(maze.getGrid().get(getPosX()).get(posTileY), KeyEvent.VK_UP);
+            } else
+                break;
+
+        }
+
+    }
+
+    private void fillAvailableGoRight(Maze maze) {
+
+
+        int posTileX = getPosX();
+        while (true) {
+
+            if (isValidMoveRight(posTileX, maze)) {
+                posTileX += 1;
+                availableMovements.put(maze.getGrid().get(posTileX).get(getPosY()), KeyEvent.VK_RIGHT);
+            } else break;
+
+        }
+    }
+
+
+    private void fillAvailableGoDown(Maze maze) {
+
+
+        int posTileY = getPosY();
+        while (true) {
+
+            if (isValidMoveDown(posTileY, maze)) {
+                posTileY += 1;
+                availableMovements.put(maze.getGrid().get(getPosX()).get(posTileY), KeyEvent.VK_DOWN);
+            } else break;
+
+        }
+    }
+
+
+    private void fillAvailableGoLeft(Maze maze) {
+
+
+        int posTileX = getPosX();
+        while (true) {
+
+            if (isValidMoveLeft(posTileX, maze)) {
+                posTileX -= 1;
+                availableMovements.put(maze.getGrid().get(posTileX).get(getPosY()), KeyEvent.VK_LEFT);
+            } else break;
+
+        }
+    }
+
 
 
     public void fillAvailableMoves(Maze maze) {
@@ -119,56 +169,20 @@ public class Player {
 
     }
 
-    private void fillAvailableGoUp(Maze maze) {
-        int posTileY = posY;
-        while (true) {
-            if (isValidMoveUP(posTileY, maze)) {
-                posTileY -= 1;
-                availableMovements.put(maze.getGrid().get(posX).get(posTileY), KeyEvent.VK_UP);
-            } else break;
-        }
-    }
-
 
     public void clearAvailableMoves() {
         availableMovements.clear();
     }
 
-
-    public Map<Tile, Integer> getAvailableMovements() {
-        return availableMovements;
-    }
-
-    private void fillAvailableGoRight(Maze maze) {
-        int posTileX = posX;
-        while (true) {
-            if (isValidMoveRight(posTileX, maze)) {
-                posTileX += 1;
-                availableMovements.put(maze.getGrid().get(posTileX).get(posY), KeyEvent.VK_RIGHT);
-            } else break;
+    public void setTilesNotAvailable(){
+        for (Tile t : availableMovements.keySet()){
+            t.setAvailable(false);
         }
     }
-
-    private void fillAvailableGoDown(Maze maze) {
-        int posTileY = posY;
-        while (true) {
-            if (isValidMoveDown(posTileY, maze)) {
-                posTileY += 1;
-                availableMovements.put(maze.getGrid().get(posX).get(posTileY), KeyEvent.VK_DOWN);
-            } else break;
-        }
-    }
-
-    private void fillAvailableGoLeft(Maze maze) {
-        int posTileX = posX;
-        while (true) {
-            if (isValidMoveLeft(posTileX, maze)) {
-                posTileX -= 1;
-                availableMovements.put(maze.getGrid().get(posTileX).get(posY), KeyEvent.VK_LEFT);
-            } else break;
-        }
-    }
-
 
 }
+
+
+
+
 

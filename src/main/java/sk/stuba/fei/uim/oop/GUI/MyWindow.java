@@ -8,31 +8,24 @@ import java.awt.*;
 
 public class MyWindow {
 
-
     public MyWindow(Game game, JLabel numberOfGames) {
-        final int SIZE_X = 600;
-        final int SIZE_Y = 300;
 
-        MyCanvas myCanvas = new MyCanvas(game);
         JFrame window = new JFrame();
-        window.setSize(SIZE_X, SIZE_Y);
-
-        window.setVisible(true);
+        window.setSize(600, 300);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setLayout(new BorderLayout());
-        window.setTitle("TOWER IN A MAZE GAME");
+        window.setTitle("A TOWER IN A MAZE GAME");
         window.setLayout(null);
         window.setFocusable(true);
 
-        GridPanel gridPanel = new GridPanel(game, myCanvas);
+        MyCanvas myCanvas = new MyCanvas(game);
+        GridPanel gridPanel = new GridPanel(myCanvas);
         GamePanel gamePanel = new GamePanel(game, myCanvas, numberOfGames);
         window.add(gamePanel);
         window.add(gridPanel);
         ArrowKeys arrowKeys = new ArrowKeys(game, myCanvas);
         window.addKeyListener(arrowKeys);
-
-
+        window.setVisible(true);
     }
-
 }

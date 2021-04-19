@@ -3,23 +3,23 @@ package sk.stuba.fei.uim.oop.Exceptions;
 import sk.stuba.fei.uim.oop.Game.Game;
 import sk.stuba.fei.uim.oop.Maze.Maze;
 
-import javax.swing.*;
 
 public class GameEnded extends Exception {
 
     public GameEnded(Game game, Boolean reset) {
-        game.getPlayer().setPosX(0);
-        game.getPlayer().setPosY(0);
+
         int rows = game.getMaze().getRows();
         int cols = game.getMaze().getCols();
         game.setMaze(new Maze(rows, cols));
+        game.getPlayer().setPositionTile(game.getMaze().getGrid().get(0).get(0));
         if (!reset) {
             game.incrementSuccessfulGames();
         }
         else {
+            game.getPlayer().clearAvailableMoves();
             game.resetSuccessfulGames();
         }
-        game.getNumberOfGamesText().setText("Number of successful games played: " + game.getSuccessfulGames());
+        game.getNumberOfGamesText().setText("Number of games successfully played: " + game.getSuccessfulGames());
 
     }
 }

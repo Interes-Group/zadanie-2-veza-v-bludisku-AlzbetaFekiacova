@@ -1,6 +1,5 @@
 package sk.stuba.fei.uim.oop.IO;
 
-import sk.stuba.fei.uim.oop.Exceptions.GameEnded;
 import sk.stuba.fei.uim.oop.Game.Game;
 import sk.stuba.fei.uim.oop.Maze.Tile;
 import sk.stuba.fei.uim.oop.GUI.MyCanvas;
@@ -39,31 +38,19 @@ public class Mouse extends MouseAdapter implements MouseMotionListener {
 
     private void mouseClick(MouseEvent e) {
 
-        if(isPositionInRadius(game.getPlayer().posXonCanvas(), game.getPlayer().posYonCanvas(), e) && !clicked){
+        if(isPositionInRadius(game.getPlayer().getPositionTile().posXonCanvas(), game.getPlayer().getPositionTile().posYonCanvas(), e) && !clicked){
 
             clicked = true;
 
-        } else if (clicked && onPosition && game.getPlayer().getAvailableMovements().size() != 0) {
+        } else if (clicked && onPosition) {
 
             if (isPositionInRadius(tile.posXonCanvas(), tile.posYonCanvas(), e)) {
 
-
                 int direction = game.getPlayer().getAvailableMovements().get(tile);
-                int numbOfMoves = abs(game.getPlayer().getPosX() - tile.getX()) + abs(game.getPlayer().getPosY() - tile.getY());
-
-
-                for (int i = 0; i < numbOfMoves; i++) {
-                    try {
-                        game.oneMove(direction);
-
-                    } catch (GameEnded gameEnded) {
-
-                    }
-                }
-                game.getMaze().getGrid().get(tile.getX()).get(tile.getY()).setAvailable(false);
+                int numberOfMoves = abs(game.getPlayer().getPosX() - tile.getX()) + abs(game.getPlayer().getPosY() - tile.getY());
+                game.move(numberOfMoves, canvas, direction);
                 clicked = false;
                 onPosition = false;
-                canvas.repaint();
             }
 
         }

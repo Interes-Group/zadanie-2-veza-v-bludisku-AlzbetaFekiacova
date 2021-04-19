@@ -7,35 +7,14 @@ public class Maze {
     private ArrayList<ArrayList<Tile>> grid;
     private int rows;
     private int cols;
-    private int size;
 
     public Maze(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        this.size = 20;
         grid = new ArrayList<>();
         new GenerateMaze(this);
 
     }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public void drawMaze(Graphics g) {
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                Tile t = grid.get(i).get(j);
-                t.drawTile(this, g);
-            }
-        }
-    }
-
 
     public void makeGrid() {
         for (int i = 0; i < rows; i++) {
@@ -60,5 +39,13 @@ public class Maze {
         return cols;
     }
 
+    public void drawMaze(Graphics g) {
+
+        for (ArrayList<Tile> line : grid) {
+            for (Tile tile : line) {
+                tile.drawTile(g);
+            }
+        }
+    }
 
 }

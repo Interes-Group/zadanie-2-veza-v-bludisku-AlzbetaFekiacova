@@ -10,7 +10,7 @@ public class MyCanvas extends Canvas {
 
 
     public MyCanvas(Game game) {
-
+        super();
         this.game = game;
         this.setFocusable(false);
         Mouse mouse = new Mouse(game, this);

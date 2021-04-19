@@ -18,10 +18,6 @@ public class Tile {
     private Map<Tile, String> unvisitedNeighbours;
 
 
-    public Map<Tile, String> getUnvisitedNeighbours() {
-        return unvisitedNeighbours;
-    }
-
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
@@ -36,14 +32,16 @@ public class Tile {
         unvisitedNeighbours = new HashMap<>();
     }
 
-
+    public Map<Tile, String> getUnvisitedNeighbours() {
+        return unvisitedNeighbours;
+    }
 
     public int posXonCanvas() {
-        return (x * 20) + 28;
+        return (x * wallLength) + 28;
     }
 
     public int posYonCanvas() {
-        return (y * 20) + 28;
+        return (y * wallLength) + 28;
     }
 
     public boolean isAvailable() {
@@ -52,6 +50,45 @@ public class Tile {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+
+    public int getX() {
+        return x;
+    }
+
+
+    public int getY() {
+        return y;
+    }
+
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public boolean isTopWall() {
+        return topWall;
+    }
+
+
+    public boolean isRightWall() {
+        return rightWall;
+    }
+
+
+
+    public boolean isLeftWall() {
+        return leftWall;
+    }
+
+
+    public boolean isBottomWall() {
+        return bottomWall;
     }
 
     public boolean isEnd() {
@@ -66,14 +103,7 @@ public class Tile {
         this.topWall = false;
     }
 
-    public void breakRightWall() {
-        this.rightWall = false;
-
-    }
-
-    public void clearNeighbours(){
-        this.unvisitedNeighbours.clear();
-    }
+    public void breakRightWall() { this.rightWall = false; }
 
     public void breakLeftWall() {
         this.leftWall = false;
@@ -83,26 +113,26 @@ public class Tile {
         this.bottomWall = false;
     }
 
-    private boolean isValidXRight(Maze maze) {
+    public boolean isValidXRight(Maze maze) {
         return (x + 1) < maze.getCols();
     }
 
-    private boolean isValidXLeft(Maze maze) {
+    public boolean isValidXLeft() {
         return x - 1 >= 0;
     }
 
-    private boolean isValidYTop(Maze maze) {
+    public boolean isValidYTop() {
         return (y - 1) >= 0;
     }
 
-    private boolean isValidYBottom(Maze maze) {
+    public boolean isValidYBottom(Maze maze) {
         return (y + 1) < maze.getCols();
     }
 
 
     public void fillNeighbours(Maze maze) {
 
-        if (isValidYTop(maze)) {
+        if (isValidYTop()) {
             if (!maze.getGrid().get(x).get(y - 1).isVisited()) {
                 unvisitedNeighbours.put(maze.getGrid().get(x).get(y - 1), "top");
             }
@@ -117,80 +147,27 @@ public class Tile {
                 unvisitedNeighbours.put(maze.getGrid().get(x).get(y + 1), "bottom");
             }
         }
-        if (isValidXLeft(maze)) {
+        if (isValidXLeft()) {
             if (!maze.getGrid().get(x - 1).get(y).isVisited()) {
                 unvisitedNeighbours.put(maze.getGrid().get(x - 1).get(y), "left");
             }
         }
     }
 
-
-    public int getX() {
-        return x;
+    public void clearNeighbours(){
+        this.unvisitedNeighbours.clear();
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
-
-    public boolean isTopWall() {
-        return topWall;
-    }
-
-    public void setTopWall(boolean topWall) {
-        this.topWall = topWall;
-    }
-
-    public boolean isRightWall() {
-        return rightWall;
-    }
-
-    public void setRightWall(boolean rightWall) {
-        this.rightWall = rightWall;
-    }
-
-    public boolean isLeftWall() {
-        return leftWall;
-    }
-
-    public void setLeftWall(boolean leftWall) {
-        this.leftWall = leftWall;
-    }
-
-    public boolean isBottomWall() {
-        return bottomWall;
-    }
-
-    public void setBottomWall(boolean bottomWall) {
-        this.bottomWall = bottomWall;
-    }
-
-    public void drawTile(Maze maze, Graphics g) {
+    public void drawTile(Graphics g) {
 
 
         int posX = x + 1;
         if (posX > 0) {
-            posX = posX * maze.getSize();
+            posX = posX * wallLength;
         }
         int posY = y + 1;
         if (posY > 0) {
-            posY = posY * maze.getSize();
+            posY = posY * wallLength;
         }
 
 

@@ -1,6 +1,7 @@
 package sk.stuba.fei.uim.oop.Game;
 
 import sk.stuba.fei.uim.oop.Exceptions.GameEnded;
+import sk.stuba.fei.uim.oop.GUI.MyCanvas;
 import sk.stuba.fei.uim.oop.Maze.Maze;
 import sk.stuba.fei.uim.oop.GUI.MyWindow;
 
@@ -15,21 +16,34 @@ public class Game {
 
     public Game() {
 
-        player = new Player();
         maze = new Maze(11, 11);
+        player = new Player(maze);
         successfulGames = 0;
-        numberOfGamesText = new JLabel("Number of successful games played: " + getSuccessfulGames());
-        MyWindow window = new MyWindow(this, numberOfGamesText);
+        numberOfGamesText = new JLabel("Number of games successfully played: " + getSuccessfulGames());
+        new MyWindow(this, numberOfGamesText);
 
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Maze getMaze() {
+        return maze;
+    }
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+    }
+
+    public JLabel getNumberOfGamesText() {
+        return numberOfGamesText;
+    }
+
+    public int getSuccessfulGames() { return successfulGames; }
 
     public void resetSuccessfulGames() {
         this.successfulGames = 0;
-    }
-
-    public int getSuccessfulGames() {
-
-        return successfulGames;
     }
 
     public void incrementSuccessfulGames() {
@@ -53,27 +67,25 @@ public class Game {
 
         }
 
-        if (maze.getGrid().get(player.getPosX()).get(player.getPosY()).isEnd()) {
+        if (player.getPositionTile().isEnd()) {
             throw new GameEnded(this, false);
         }
+
+        player.setTilesNotAvailable();
         player.clearAvailableMoves();
 
     }
 
-    public Player getPlayer() {
-        return player;
-    }
+    public void move(int numberOfMoves, MyCanvas canvas, int direction){
+        for (int i = 0; i < numberOfMoves; i++) {
+            try {
+                oneMove(direction);
 
+            } catch (GameEnded gameEnded) {
 
-    public Maze getMaze() {
-        return maze;
-    }
+            }
+        }
+        canvas.repaint();
 
-    public void setMaze(Maze maze) {
-        this.maze = maze;
-    }
-
-    public JLabel getNumberOfGamesText() {
-        return numberOfGamesText;
     }
 }
