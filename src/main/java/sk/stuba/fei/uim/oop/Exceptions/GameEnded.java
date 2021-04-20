@@ -16,7 +16,6 @@ public class GameEnded extends Exception {
             game.incrementSuccessfulGames();
         }
         else {
-            game.getPlayer().clearAvailableMoves();
             game.resetSuccessfulGames();
         }
         game.getNumberOfGamesText().setText("Number of games successfully played: " + game.getSuccessfulGames());

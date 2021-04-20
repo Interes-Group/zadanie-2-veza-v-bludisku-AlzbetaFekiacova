@@ -36,7 +36,8 @@ public class Mouse extends MouseAdapter implements MouseMotionListener {
     }
 
 
-    private void mouseClick(MouseEvent e) {
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
         if(isPositionInRadius(game.getPlayer().getPositionTile().posXonCanvas(), game.getPlayer().getPositionTile().posYonCanvas(), e) && !clicked){
 
@@ -54,10 +55,6 @@ public class Mouse extends MouseAdapter implements MouseMotionListener {
             }
 
         }
-    }
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        mouseClick(e);
     }
 
     @Override

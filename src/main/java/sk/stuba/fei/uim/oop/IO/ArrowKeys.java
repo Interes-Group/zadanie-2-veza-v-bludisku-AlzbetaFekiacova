@@ -1,10 +1,8 @@
 package sk.stuba.fei.uim.oop.IO;
 
-import sk.stuba.fei.uim.oop.Exceptions.GameEnded;
 import sk.stuba.fei.uim.oop.GUI.MyCanvas;
 import sk.stuba.fei.uim.oop.Game.Game;
 
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
