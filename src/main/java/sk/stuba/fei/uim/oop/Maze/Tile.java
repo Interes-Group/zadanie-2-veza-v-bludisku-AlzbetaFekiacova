@@ -63,11 +63,11 @@ public class Tile {
     }
 
 
-    public boolean isVisited() {
+    protected boolean isVisited() {
         return visited;
     }
 
-    public void setVisited(boolean visited) {
+    protected void setVisited(boolean visited) {
         this.visited = visited;
     }
 
@@ -80,36 +80,34 @@ public class Tile {
         return rightWall;
     }
 
-
-
     public boolean isLeftWall() {
         return leftWall;
     }
-
 
     public boolean isBottomWall() {
         return bottomWall;
     }
 
+
     public boolean isEnd() {
         return isEnd;
     }
 
-    public void setEnd(boolean end) {
+    protected void setEnd(boolean end) {
         isEnd = end;
     }
 
-    public void breakTopWall() {
+    protected void breakTopWall() {
         this.topWall = false;
     }
 
-    public void breakRightWall() { this.rightWall = false; }
+    protected void breakRightWall() { this.rightWall = false; }
 
-    public void breakLeftWall() {
+    protected void breakLeftWall() {
         this.leftWall = false;
     }
 
-    public void breakBottomWall() {
+    protected void breakBottomWall() {
         this.bottomWall = false;
     }
 
@@ -193,22 +191,22 @@ public class Tile {
         }
     }
 
-    public void drawRightWall(Graphics g, int posX, int posY) {
+    private void drawRightWall(Graphics g, int posX, int posY) {
 
         g.drawLine(posX + wallLength, posY, posX + wallLength, posY + wallLength);
     }
 
-    public void drawTopWall(Graphics g, int posX, int posY) {
+    private void drawTopWall(Graphics g, int posX, int posY) {
 
     g.drawLine(posX, posY, posX + wallLength, posY);
     }
 
-    public void drawBottomWall(Graphics g, int posX, int posY) {
+    private void drawBottomWall(Graphics g, int posX, int posY) {
         g.drawLine(posX, posY + wallLength, posX + wallLength, posY + wallLength);
 
     }
 
-    public void drawLeftWall(Graphics g, int posX, int posY) {
+    private void drawLeftWall(Graphics g, int posX, int posY) {
         g.drawLine(posX, posY, posX, posY + wallLength);
     }
 }
