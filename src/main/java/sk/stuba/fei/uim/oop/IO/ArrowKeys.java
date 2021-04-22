@@ -18,6 +18,6 @@ public class ArrowKeys extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        game.move(1, this.canvas, e.getKeyCode());
+        game.oneRound(1, this.canvas, e.getKeyCode());
     }
 }

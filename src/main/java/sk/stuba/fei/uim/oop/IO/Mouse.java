@@ -49,7 +49,7 @@ public class Mouse extends MouseAdapter implements MouseMotionListener {
 
                 int direction = game.getPlayer().getAvailableMovements().get(tile);
                 int numberOfMoves = abs(game.getPlayer().getPosX() - tile.getX()) + abs(game.getPlayer().getPosY() - tile.getY());
-                game.move(numberOfMoves, canvas, direction);
+                game.oneRound(numberOfMoves, canvas, direction);
                 clicked = false;
                 onPosition = false;
             }

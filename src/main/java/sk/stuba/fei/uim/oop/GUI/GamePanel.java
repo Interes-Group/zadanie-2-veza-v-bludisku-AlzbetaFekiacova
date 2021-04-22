@@ -8,12 +8,15 @@ import java.awt.event.KeyEvent;
 
 public class GamePanel extends JPanel {
 
-    public GamePanel(Game game, MyCanvas canvas, JLabel numberOfGames) {
+    private JLabel numberOfGamesText;
+
+    public GamePanel(Game game, MyCanvas canvas, JLabel numberOfGamesText) {
         super();
         this.setBackground(Color.cyan);
         this.setBounds(300, 0, 300, 300);
         this.setLayout(null);
         this.setFocusable(false);
+        this.numberOfGamesText = numberOfGamesText;
 
 
         MyButton reset = new MyButton("RESET", 100, 40, 80, 25, -1, game, canvas);
@@ -23,13 +26,14 @@ public class GamePanel extends JPanel {
         MyButton left = new MyButton("LEFT", 15, 120, 80, 25, KeyEvent.VK_LEFT, game, canvas);
 
 
-        numberOfGames.setBounds(30, 170, 270, 25);
+        numberOfGamesText.setBounds(30, 170, 270, 25);
 
         this.add(reset);
         this.add(up);
         this.add(right);
         this.add(down);
         this.add(left);
-        this.add(numberOfGames);
+        this.add(numberOfGamesText);
     }
+
 }

@@ -160,15 +160,13 @@ public class Tile {
 
     public void drawTile(Graphics g) {
 
-
         int posX = x + 1;
-        if (posX > 0) {
-            posX = posX * wallLength;
-        }
+
+        posX = posX * wallLength;
+
         int posY = y + 1;
-        if (posY > 0) {
-            posY = posY * wallLength;
-        }
+        posY = posY * wallLength;
+
 
 
         if (isAvailable()){

@@ -19,8 +19,8 @@ public class Game {
         maze = new Maze(11, 11);
         player = new Player(maze);
         successfulGames = 0;
-        numberOfGamesText = new JLabel("Number of games successfully played: " + getSuccessfulGames());
-        new MyWindow(this, numberOfGamesText);
+        MyWindow myWindow = new MyWindow(this);
+        numberOfGamesText = myWindow.getNumberOfGamesText();
 
     }
 
@@ -76,7 +76,7 @@ public class Game {
 
     }
 
-    public void move(int numberOfMoves, MyCanvas canvas, int direction){
+    public void oneRound(int numberOfMoves, MyCanvas canvas, int direction){
         for (int i = 0; i < numberOfMoves; i++) {
             try {
                 oneMove(direction);
